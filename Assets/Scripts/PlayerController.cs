@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField] float lineLength = 1f;
     [SerializeField] float offset = 1f;
     [SerializeField] ParticleSystem particles;
+    private float CoyoteTime = 0.8f;
+    private float ctt;
 
     [SerializeField] bool isJumping = false;
 
     void Start()
     {
-
+        ctt = CoyoteTime;
     }
 
     void Update()
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") == -1) GetComponent<SpriteRenderer>().flipX = false;
 
 
-
+        /*
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
             //particles.Play();
 
         }
+        */
 
 
         Vector2 origin = new Vector2(transform.position.x, transform.position.y - offset);
@@ -43,12 +46,57 @@ public class Player : MonoBehaviour
 
         if (raycast.collider == null)
         {
-            isJumping = true;
+            ctt = ctt - Time.deltaTime;
+            Debug.Log($"Tiempo de salto restante: {ctt}");
+
+            if (ctt <= 0 || GetComponent<Rigidbody2D>().velocity.y > 0)
+            {
+               
+                isJumping = true;
+                // SetAnimation("Jump");
+            }
+            else if (ctt > 0 && (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))))
+            {
+
+                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
+                //GetComponent<Rigidbody2D>().AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+
+            }
+
+            
+            
+               
+               
+            
         }
-        else
-        {
+
+        else {
+
+            ctt = CoyoteTime;
+            Debug.Log($"Tiempo de salto restante: {ctt}");
             isJumping = false;
+
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) {
+
+                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
+               
+
+            }
+
+            if ((Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.Space)) && GetComponent<Rigidbody2D>().velocity.y<0)
+            {
+
+                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce+2);
+
+
+            }
+
+
+
         }
+
+        
 
         // ------------------------------------------------------------------------------------------
         // APLICACIÓN AL JUEGO DE PLATAFORMAS QUE UTILIZA RAYCAST PARA DETECTAR QUE ESTÁ EN EL SUELO
@@ -56,7 +104,7 @@ public class Player : MonoBehaviour
         // Si el raycast no toca con nada el personaje está en el aire
         if (raycast.collider == null)
         {
-           // SetAnimation("Jump");
+           
         }
         else
         {
