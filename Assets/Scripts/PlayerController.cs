@@ -31,8 +31,8 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
 
-        if (horizontalInput == 1) GetComponent<SpriteRenderer>().flipX = false;
-        if (horizontalInput == -1) GetComponent<SpriteRenderer>().flipX = true;
+        if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
+        if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
 
 
         /*
