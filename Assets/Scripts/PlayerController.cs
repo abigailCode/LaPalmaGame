@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int playerSpeed;
-    [SerializeField] int jumpForce;
+    [SerializeField] float playerSpeed = 5f;
+    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float fallMultiplier = 2.5f;
+    [SerializeField] float lowJumpMultiplier = 2f;
     [SerializeField] float lineLength = 1f;
     [SerializeField] float offset = 1f;
     [SerializeField] ParticleSystem particles;
-    private float CoyoteTime = 0.8f;
+    private float CoyoteTime = 0.2f;
     private float ctt;
 
     [SerializeField] bool isJumping = false;
 
+    private Rigidbody2D rb;
+
+
     void Start()
     {
         ctt = CoyoteTime;
+        rb = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(playerSpeed * Input.GetAxisRaw("Horizontal"), GetComponent<Rigidbody2D>().velocity.y);
-        if (Input.GetAxisRaw("Horizontal") == 1) GetComponent<SpriteRenderer>().flipX = true;
-        if (Input.GetAxisRaw("Horizontal") == -1) GetComponent<SpriteRenderer>().flipX = false;
+        if (horizontalInput == 1) GetComponent<SpriteRenderer>().flipX = true;
+        if (horizontalInput == -1) GetComponent<SpriteRenderer>().flipX = false;
 
 
         /*
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             //AudioManager.instance.PlaySFX("Jump");
             //particles.Play();
 
@@ -49,82 +57,78 @@ public class Player : MonoBehaviour
             ctt = ctt - Time.deltaTime;
             Debug.Log($"Tiempo de salto restante: {ctt}");
 
-            if (ctt <= 0 || GetComponent<Rigidbody2D>().velocity.y > 0)
+            if (ctt <= 0 || rb.velocity.y > 0)
             {
-               
                 isJumping = true;
                 // SetAnimation("Jump");
             }
             else if (ctt > 0 && (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))))
             {
-
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
-                //GetComponent<Rigidbody2D>().AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+                Jump();
+                //rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
                 isJumping = true;
-
             }
-
-            
-            
-               
-               
-            
         }
-
-        else {
-
+        else
+        {
             ctt = CoyoteTime;
             Debug.Log($"Tiempo de salto restante: {ctt}");
             isJumping = false;
 
-            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) {
-
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
-               
-
-            }
-
-            if ((Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.Space)) && GetComponent<Rigidbody2D>().velocity.y<0)
-            {
-
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce+2);
-
-
-            }
-
-
-
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) Jump();
+            if ((Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.Space)) && rb.velocity.y<0) rb.velocity = new Vector2(rb.velocity.x, jumpForce+2);
         }
 
         
 
         // ------------------------------------------------------------------------------------------
-        // APLICACIÓN AL JUEGO DE PLATAFORMAS QUE UTILIZA RAYCAST PARA DETECTAR QUE ESTÁ EN EL SUELO
+        // APLICACIï¿½N AL JUEGO DE PLATAFORMAS QUE UTILIZA RAYCAST PARA DETECTAR QUE ESTï¿½ EN EL SUELO
         // ------------------------------------------------------------------------------------------
-        // Si el raycast no toca con nada el personaje está en el aire
+        // Si el raycast no toca con nada el personaje estï¿½ en el aire
         if (raycast.collider == null)
         {
            
         }
         else
         {
-            // Si está sobre una superficie pero se mueve lateralmente
-           // if (GetComponent<Rigidbody2D>().velocity.x != 0) SetAnimation("Walk");
-            //else SetAnimation("Idle"); // Si está sobre una superficie pero no se mueve
+            // Si estï¿½ sobre una superficie pero se mueve lateralmente
+           // if (rb.velocity.x != 0) SetAnimation("Walk");
+            //else SetAnimation("Idle"); // Si estï¿½ sobre una superficie pero no se mueve
         }
+
+        ApplyCustomGravity();
 
     }
 
+    void Jump()
+    {
+        // Establecer la velocidad vertical instantï¿½neamente al valor de salto
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    void ApplyCustomGravity()
+    {
+        if (rb.velocity.y < 0)
+        {
+            // Aplicar gravedad adicional durante la caï¿½da para que se sienta mï¿½s natural
+            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            // Aplicar gravedad reducida durante el salto mantenido para un control mï¿½s preciso
+            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
     void SetAnimation(string name)
     {
 
-        // Obtenemos todos los parámetros del Animator
+        // Obtenemos todos los parï¿½metros del Animator
         AnimatorControllerParameter[] parametros = GetComponent<Animator>().parameters;
 
-        // Recorremos todos los parámetros y los ponemos a false
+        // Recorremos todos los parï¿½metros y los ponemos a false
         foreach (var item in parametros) GetComponent<Animator>().SetBool(item.name, false);
 
-        // Activamos el pasado por parámetro
+        // Activamos el pasado por parï¿½metro
         GetComponent<Animator>().SetBool(name, true);
 
     }
