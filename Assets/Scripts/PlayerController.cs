@@ -31,8 +31,8 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
 
-        if (horizontalInput == 1) GetComponent<SpriteRenderer>().flipX = true;
-        if (horizontalInput == -1) GetComponent<SpriteRenderer>().flipX = false;
+        if (horizontalInput == 1) GetComponent<SpriteRenderer>().flipX = false;
+        if (horizontalInput == -1) GetComponent<SpriteRenderer>().flipX = true;
 
 
         /*
@@ -46,13 +46,19 @@ public class Player : MonoBehaviour
         */
 
 
-        Vector2 origin = new Vector2(transform.position.x, transform.position.y - offset);
-        Vector2 target = new Vector2(transform.position.x, transform.position.y - offset - lineLength);
+        Vector2 origin = new Vector2(transform.position.x-0.25f, transform.position.y - offset);
+        Vector2 target = new Vector2(transform.position.x-0.25f, transform.position.y - offset - lineLength);
+
+        Vector2 origin2 = new Vector2(transform.position.x+0.25f, transform.position.y - offset);
+        Vector2 target2 = new Vector2(transform.position.x+0.25f, transform.position.y - offset - lineLength);
+
         Debug.DrawLine(origin, target, Color.black);
+        Debug.DrawLine(origin2, target2, Color.black);
 
         RaycastHit2D raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
+        RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
-        if (raycast.collider == null)
+        if (raycast.collider == null && raycast2.collider == null)
         {
             ctt = ctt - Time.deltaTime;
             Debug.Log($"Tiempo de salto restante: {ctt}");
@@ -85,15 +91,17 @@ public class Player : MonoBehaviour
         // APLICACI�N AL JUEGO DE PLATAFORMAS QUE UTILIZA RAYCAST PARA DETECTAR QUE EST� EN EL SUELO
         // ------------------------------------------------------------------------------------------
         // Si el raycast no toca con nada el personaje est� en el aire
-        if (raycast.collider == null)
+        if (raycast.collider == null && raycast2.collider == null)
         {
            
         }
         else
         {
             // Si est� sobre una superficie pero se mueve lateralmente
-           // if (rb.velocity.x != 0) SetAnimation("Walk");
+            // if (rb.velocity.x != 0) SetAnimation("Walk");
             //else SetAnimation("Idle"); // Si est� sobre una superficie pero no se mueve
+            ctt = CoyoteTime;
+            Debug.Log($"Tiempo de salto restante: {ctt}");
         }
 
         ApplyCustomGravity();
@@ -104,6 +112,7 @@ public class Player : MonoBehaviour
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        isJumping = true;
     }
 
     void ApplyCustomGravity()
