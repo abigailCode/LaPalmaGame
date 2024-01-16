@@ -46,14 +46,14 @@ public class Player : MonoBehaviour
         */
 
 
-        Vector2 origin = new Vector2(transform.position.x-0.25f, transform.position.y - offset);
+        Vector2 origin = new Vector2(transform.position.x-0.25f, transform.position.y*rb.transform.localScale.y - offset);
         Vector2 target = new Vector2(transform.position.x-0.25f, transform.position.y - offset - lineLength);
 
-        Vector2 origin2 = new Vector2(transform.position.x+0.25f, transform.position.y - offset);
-        Vector2 target2 = new Vector2(transform.position.x+0.25f, transform.position.y - offset - lineLength);
+        Vector2 origin2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.25f, transform.position.y - offset);
+        Vector2 target2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.25f, transform.position.y*rb.transform.localScale.y - offset - lineLength);
 
-        Debug.DrawLine(origin, target, Color.black);
-        Debug.DrawLine(origin2, target2, Color.black);
+        Debug.DrawLine(origin, target, Color.red);
+        Debug.DrawLine(origin2, target2, Color.red);
 
         RaycastHit2D raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
         RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
