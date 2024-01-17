@@ -82,7 +82,6 @@ public class Player : MonoBehaviour
             isJumping = false;
 
             if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) Jump();
-            if ((Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.Space)) && rb.velocity.y<0) rb.velocity = new Vector2(rb.velocity.x, jumpForce+2);
         }
 
         
@@ -108,6 +107,12 @@ public class Player : MonoBehaviour
 
     }
 
+    //void Jump()
+    //{
+    //    // Establecer la velocidad vertical instant�neamente al valor de salto
+    //    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    //    isJumping = true;
+    //}
     void Jump()
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
