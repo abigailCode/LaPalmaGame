@@ -15,6 +15,15 @@ public class Player : MonoBehaviour
     private float chargeTime = 0f;
     private float ctt;
 
+    Vector2 origin;
+    Vector2 target;
+
+    Vector2 origin2;
+    Vector2 target2;
+
+    RaycastHit2D raycast;
+    RaycastHit2D raycast2;
+
     [SerializeField] bool isJumping = false;
 
     private Rigidbody2D rb;
@@ -25,10 +34,27 @@ public class Player : MonoBehaviour
         ctt = CoyoteTime;
         rb = GetComponent<Rigidbody2D>();
 
+        
+
+        
+
+
+
     }
 
     void Update()
     {
+
+        origin = new Vector2(transform.position.x - 0.55f, transform.position.y - offset);
+        target = new Vector2(transform.position.x - 0.55f, transform.position.y - offset - lineLength);
+
+        origin2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset);
+        target2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset - lineLength);
+
+        raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
+        raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
+
+        
 
         ChargeJump();
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -49,21 +75,16 @@ public class Player : MonoBehaviour
         */
 
 
-        Vector2 origin = new Vector2(transform.position.x-0.5f, transform.position.y*rb.transform.localScale.y - offset);
-        Vector2 target = new Vector2(transform.position.x-0.5f, transform.position.y - offset - lineLength);
-
-        Vector2 origin2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.5f, transform.position.y - offset);
-        Vector2 target2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.5f, transform.position.y*rb.transform.localScale.y - offset - lineLength);
+        
 
         Debug.DrawLine(origin, target, Color.red);
         Debug.DrawLine(origin2, target2, Color.red);
 
-        RaycastHit2D raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
-        RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
+        
 
-        if (raycast.collider == null && raycast2.collider == null)
+        if ((raycast.collider == null && raycast2.collider == null))
         {
-            rb.sharedMaterial.bounciness = 5;
+            rb.sharedMaterial.bounciness = 0.1f;
             rb.sharedMaterial.friction = 0;
             Debug.Log($"Con rebote");
             ctt = ctt - Time.deltaTime;
