@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] float lineLength = 1f;
     [SerializeField] float offset = 1f;
     [SerializeField] ParticleSystem particles;
-    private float CoyoteTime = 0.2f;
+    private float CoyoteTime = 0.1f;
+    private float chargeTime = 0f;
     private float ctt;
 
     [SerializeField] bool isJumping = false;
@@ -28,8 +29,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        ChargeJump();
         float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
+
 
         if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
         if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
@@ -46,11 +49,11 @@ public class Player : MonoBehaviour
         */
 
 
-        Vector2 origin = new Vector2(transform.position.x-0.25f, transform.position.y*rb.transform.localScale.y - offset);
-        Vector2 target = new Vector2(transform.position.x-0.25f, transform.position.y - offset - lineLength);
+        Vector2 origin = new Vector2(transform.position.x-0.5f, transform.position.y*rb.transform.localScale.y - offset);
+        Vector2 target = new Vector2(transform.position.x-0.5f, transform.position.y - offset - lineLength);
 
-        Vector2 origin2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.25f, transform.position.y - offset);
-        Vector2 target2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.25f, transform.position.y*rb.transform.localScale.y - offset - lineLength);
+        Vector2 origin2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.5f, transform.position.y - offset);
+        Vector2 target2 = new Vector2(rb.transform.localScale.x*transform.position.x+0.5f, transform.position.y*rb.transform.localScale.y - offset - lineLength);
 
         Debug.DrawLine(origin, target, Color.red);
         Debug.DrawLine(origin2, target2, Color.red);
@@ -60,8 +63,11 @@ public class Player : MonoBehaviour
 
         if (raycast.collider == null && raycast2.collider == null)
         {
+            rb.sharedMaterial.bounciness = 5;
+            rb.sharedMaterial.friction = 0;
+            Debug.Log($"Con rebote");
             ctt = ctt - Time.deltaTime;
-            Debug.Log($"Tiempo de salto restante: {ctt}");
+            //Debug.Log($"Tiempo de salto restante: {ctt}");
 
             if (ctt <= 0 || rb.velocity.y > 0)
             {
@@ -77,12 +83,18 @@ public class Player : MonoBehaviour
         }
         else
         {
+            rb.sharedMaterial.bounciness = 0;
+            rb.sharedMaterial.friction = 10;
+            Debug.Log($"Con rebote");
+            transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
             ctt = CoyoteTime;
-            Debug.Log($"Tiempo de salto restante: {ctt}");
+            //Debug.Log($"Tiempo de salto restante: {ctt}");
             isJumping = false;
 
-            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) Jump();
+            //if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) Jump();
         }
+
+       
 
         
 
@@ -100,10 +112,24 @@ public class Player : MonoBehaviour
             // if (rb.velocity.x != 0) SetAnimation("Walk");
             //else SetAnimation("Idle"); // Si est� sobre una superficie pero no se mueve
             ctt = CoyoteTime;
-            Debug.Log($"Tiempo de salto restante: {ctt}");
+            //Debug.Log($"Tiempo de salto restante: {ctt}");
         }
 
         ApplyCustomGravity();
+
+        if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0) {
+
+            
+            if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }
+            /*if (chargeTime < 0.7f && chargeTime > 0.3f) { chargeTime = 0.7f; Debug.Log("Nv. de salto 2: x0.7"); }
+            if (chargeTime < 1.0f && chargeTime > 0.7f) { chargeTime = 1.0f; Debug.Log("Nv. de salto 3: x1.0"); }
+            if (chargeTime < 1.2f && chargeTime > 1.0f) { chargeTime = 1.0f; Debug.Log("Nv. de salto 4: x1.2"); }
+            */
+            
+            
+            Jump();
+        
+        }
 
     }
 
@@ -116,8 +142,26 @@ public class Player : MonoBehaviour
     void Jump()
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+        
+        if((Input.GetAxisRaw("Horizontal")!=0))rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*playerSpeed, jumpForce*chargeTime);
+        else rb.velocity = new Vector2(0, jumpForce * chargeTime);
         isJumping = true;
+        chargeTime = 0;
+        Debug.Log("chargeTime reseteado a 0");
+    }
+
+    void ChargeJump() {
+
+        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping) {
+
+            
+            chargeTime = chargeTime + Time.deltaTime;
+            if (chargeTime >= 1.25f) { chargeTime = 1.25f;}
+            Debug.Log($"El tiempo de carga es de: {chargeTime}");
+
+        }
+
     }
 
     void ApplyCustomGravity()
