@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] GameObject camera;
-    [SerializeField] float yMin;
-    [SerializeField] float yMax;
-    // Start is called before the first frame update
+    [SerializeField] Camera camera;
+    float cameraHeight;
+
+
     void Start()
     {
+        //Guardamos el alto de la cámara
+        cameraHeight = GetCameraHeight();
         //AudioManager.instance.PlayMusic("MainTheme");
     }
 
-    //void Update()
-    //{
-    //    Mathf.Clamp(1, yMin , yMax);
-
-    //    transform.position = new Vector3(transform.position.x, Mathf.Clamp(player.transform.position.y, yMin, yMax), transform.position.z);
-    //}
-
-    //void Update()
-    //{
-    //    float clampedY = Mathf.Clamp(player.transform.position.y, yMin, yMax);
-
-    //    if (player.transform.position.y < yMin || player.transform.position.y > yMax)
-    //    {
-    //        transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
-    //    }
-    //}
-
     void OnBecameInvisible()
     {
+        
         if (camera != null)
         {
-            camera.transform.position = new Vector3(camera.transform.position.x, transform.position.y, camera.transform.position.z);
+            //Comprobamos si el player está por encima o por debajo de la cámara 
+            //para saber si subimo o bajamos la cámara
+
+            float objectY = transform.position.y;
+            float cameraBottomY = camera.transform.position.y - cameraHeight / 2f;
+            float cameraTopY = camera.transform.position.y + cameraHeight / 2f;
+
+            if (objectY < cameraBottomY)
+            {
+                RepositionCamera(-cameraHeight / 2f);
+            }
+            else if (objectY > cameraTopY)
+            {
+                RepositionCamera(cameraHeight / 2f);
+            }
         }
+    }
+
+    void RepositionCamera(float offsetY)
+    {
+        //modificamos la posición de la cámara en "y", sumando la altura de la cámara 
+        //negativo o positivo en función de si el player está por debajo o por encima
+        camera.transform.position = new Vector3(camera.transform.position.x, transform.position.y + offsetY, camera.transform.position.z);
+    }
+
+    public float GetCameraHeight()
+    {
+        return camera.orthographicSize * 2f;
     }
 }
