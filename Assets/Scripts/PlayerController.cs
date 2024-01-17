@@ -84,9 +84,9 @@ public class Player : MonoBehaviour
 
         if ((raycast.collider == null && raycast2.collider == null))
         {
-            rb.sharedMaterial.bounciness = 0.1f;
+            rb.sharedMaterial.bounciness = 8f;
             rb.sharedMaterial.friction = 0;
-            Debug.Log($"Con rebote");
+            Debug.Log("Con rebote");
             ctt = ctt - Time.deltaTime;
             //Debug.Log($"Tiempo de salto restante: {ctt}");
 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
         {
             rb.sharedMaterial.bounciness = 0;
             rb.sharedMaterial.friction = 10;
-            Debug.Log($"Con rebote");
+            Debug.Log("Con rebote");
             transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
             ctt = CoyoteTime;
             //Debug.Log($"Tiempo de salto restante: {ctt}");
@@ -212,17 +212,25 @@ public class Player : MonoBehaviour
 
     }
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision != null)
-    //    {
-    //        if (collision.collider.CompareTag("Enemy"))
-    //        {
-    //            AudioManager.instance.PlaySFX("Hit");
-    //            AudioManager.instance.PlayMusic("LoseALife");
-    //            SceneController.instance.LoadScene("Gameover");
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision != null)
+        {
+            if (collision.collider.CompareTag("Plat") && (raycast.collider == null && raycast2.collider == null)) {
 
-    //        }
-    //    }
-    //}
+
+
+                if (rb.transform.position.x < collision.gameObject.transform.position.x) { rb.velocity = new Vector2(-playerSpeed + 2, rb.velocity.y); }
+                else if ((rb.transform.position.x > collision.gameObject.transform.position.x)){ rb.velocity = new Vector2(playerSpeed - 2, rb.velocity.y); }
+                else if(rb.velocity.x == 0) rb.velocity = new Vector2(0, rb.velocity.y);
+                else rb.velocity = new Vector2(0, rb.velocity.y);
+
+                /* if(rb.velocity.x >0) rb.velocity = new Vector2(-playerSpeed+2, rb.velocity.y);
+                 else if (rb.velocity.x < 0) rb.velocity = new Vector2(playerSpeed - 2, rb.velocity.y);
+                 
+                */
+            } 
+
+        }
+    }
 }
