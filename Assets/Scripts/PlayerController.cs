@@ -56,8 +56,13 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
 
 
-        if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
-        if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
+        if(!isJumping) {
+
+            if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
+            if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
+
+        }
+        
 
 
         /*
@@ -76,11 +81,11 @@ public class Player : MonoBehaviour
         Debug.DrawLine(origin, target, Color.red);
         Debug.DrawLine(origin2, target2, Color.red);
 
-        
+
 
         if ((raycast.collider == null && raycast2.collider == null))
         {
-            rb.sharedMaterial.bounciness = 0.5f;
+            rb.sharedMaterial.bounciness = 5f;
             rb.sharedMaterial.friction = 0;
             Debug.Log("Con rebote");
             ctt = ctt - Time.deltaTime;
@@ -100,23 +105,26 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.sharedMaterial.bounciness = 0;
-            rb.sharedMaterial.friction = 10;
-            Debug.Log("Sin rebote");
 
-            if (canMove) {
+           
 
-                transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
-                
-            }
-            
-            ctt = CoyoteTime;
-            //Debug.Log($"Tiempo de salto restante: {ctt}");
-            isJumping = false;
+                rb.sharedMaterial.bounciness = 0;
+                rb.sharedMaterial.friction = 10;
+                Debug.Log("Sin rebote");
 
-            //if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) Jump();
+                if (canMove)
+                {
+
+                    transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
+
+                }
+
+                ctt = CoyoteTime;
+                //Debug.Log($"Tiempo de salto restante: {ctt}");
+                isJumping = false;
+
+                //if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) Jump();
         }
-
        
 
         
@@ -167,7 +175,7 @@ public class Player : MonoBehaviour
         // Establecer la velocidad vertical instant�neamente al valor de salto
 
         
-        if((Input.GetAxisRaw("Horizontal")!=0))rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/2), jumpForce*chargeTime);
+        if((Input.GetAxisRaw("Horizontal")!=0))rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), jumpForce*chargeTime), ForceMode2D.Impulse);
         else rb.velocity = new Vector2(0, jumpForce * chargeTime);
         isJumping = true;
         chargeTime = 0;
@@ -224,8 +232,14 @@ public class Player : MonoBehaviour
             if (collision.collider.CompareTag("Plat") && (raycast.collider == null && raycast2.collider == null)) {
 
 
-                if ((collision.collider.transform.position.x < rb.transform.position.x) && rb.velocity.x >0){ rb.velocity = new Vector2(-playerSpeed/2 + 2, rb.velocity.y); }
-                else if ((collision.collider.transform.position.x > rb.transform.position.x) && rb.velocity.x < 0) { rb.velocity = new Vector2(-playerSpeed / 2 + 2, rb.velocity.y); }
+                if ((collision.collider.transform.position.x < rb.transform.position.x) && rb.velocity.x >0){
+                    //rb.velocity = new Vector2(-playerSpeed/2 + 2, rb.velocity.y);
+                    rb.AddForce(new Vector2( (playerSpeed / 2f) + 2, rb.velocity.y), ForceMode2D.Impulse);
+                }
+                else if ((collision.collider.transform.position.x > rb.transform.position.x) && rb.velocity.x < 0) { 
+                    //rb.velocity = new Vector2(playerSpeed / 2 + 2, rb.velocity.y);
+                    rb.AddForce(new Vector2((-1 * playerSpeed / 2f) + 2, rb.velocity.y), ForceMode2D.Impulse);
+                }
                 else rb.velocity = new Vector2(0, rb.velocity.y);
 
                 /*
