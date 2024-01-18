@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ddd32a64acb27fb4fa2cd60f4636bfad
+guid: 9fa56a9607f363a4e9a0d64fd236be93
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EnanoPalmaIdle_0
+      name: EnanoPalmaAnimaciones_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 32
-        height: 32
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2719f558faefc64fb8ddf5a392eaa5b
-      internalID: -370476730
+      spriteID: 103354eca9792fd4881a79ed44462fd1
+      internalID: -384027389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaIdle_1
+      name: EnanoPalmaAnimaciones_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
+        x: 42
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bb77dd124a44d94db9dd78d7d0f3036
-      internalID: -1198817281
+      spriteID: 532a34ebbf3c86a4b93aa5b1bd43079d
+      internalID: 14440286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaIdle_2
+      name: EnanoPalmaAnimaciones_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
+        x: 84
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c232d1bfbff2ae848819d8ffd35011a4
-      internalID: 1935599434
+      spriteID: b6156cd011d926f4dab5b7f78bd901f8
+      internalID: 580768503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaIdle_3
+      name: EnanoPalmaAnimaciones_3
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 84
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22023358534e5834081edc77a26864f3
+      internalID: -1569282611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4aa78ec8cf0af7499695984e94a61eb
+      internalID: 602924353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01dc01992a61e404d90e9e4b48fa4046
+      internalID: -774952337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_6
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 444b6392ecbfe964c96dde56b182a9b6
+      internalID: -293359347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_7
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f1ea3c77ffc7049bca6c865b98793e
+      internalID: 666532971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 42
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 570f06e40fdcbab498ee406ff049941a
-      internalID: 140011195
+      spriteID: 85bbdcd613cd6f748859575d534cb78f
+      internalID: -1853611476
       vertices: []
       indices: 
       edges: []
@@ -222,7 +327,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 430882f3c9fae2a4caf68b6c5c23a2c9
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -230,10 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      EnanoPalmaIdle_0: -370476730
-      EnanoPalmaIdle_1: -1198817281
-      EnanoPalmaIdle_2: 1935599434
-      EnanoPalmaIdle_3: 140011195
+      EnanoPalmaAnimaciones_0: -384027389
+      EnanoPalmaAnimaciones_1: 14440286
+      EnanoPalmaAnimaciones_2: 580768503
+      EnanoPalmaAnimaciones_3: -1569282611
+      EnanoPalmaAnimaciones_4: 602924353
+      EnanoPalmaAnimaciones_5: -774952337
+      EnanoPalmaAnimaciones_6: -293359347
+      EnanoPalmaAnimaciones_7: 666532971
+      EnanoPalmaAnimaciones_8: -1853611476
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
