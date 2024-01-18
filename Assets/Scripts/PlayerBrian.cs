@@ -1,153 +1,129 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerBrian : MonoBehaviour
+public class JumpKingController : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 5f;
-    [SerializeField] float jumpForce = 10f;
-    [SerializeField] float fallMultiplier = 2.5f;
-    [SerializeField] float lowJumpMultiplier = 2f;
-    [SerializeField] float lineLength = 1f;
-    [SerializeField] float offset = 1f;
-    [SerializeField] ParticleSystem particles;
-
-    private float CoyoteTime = 0.1f;
-    private float chargeTime = 0f;
-    private float ctt;
-    private bool canMove = true;
-    private bool isJumping = false;
+    public float minJumpForce = 5f;
+    public float maxJumpForce = 20f;
+    public float wallBounceForce = 5f;
+    public float chargeSpeed = 5f;
+    public float maxChargeTime = 2f;
 
     private Rigidbody2D rb;
+    private bool isJumping = false;
+    private float currentJumpForce = 0f;
+    private float chargeTime = 0f;
 
-    Vector2 origin;
-    Vector2 target;
 
-    Vector2 origin2;
-    Vector2 target2;
-
-    RaycastHit2D raycast;
-    RaycastHit2D raycast2;
+    public Slider jumpSlider; // Asigna un objeto Slider desde el editor
+    private Animator animator;
 
     void Start()
     {
-        ctt = CoyoteTime;
         rb = GetComponent<Rigidbody2D>();
-        canMove = true;
+        currentJumpForce = minJumpForce;
+        chargeTime = 0f;
+        // Obtén el componente Animator
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        HandleMovementInput();
+        // Detectar el input de salto
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
+            StartCharging();
+        }
 
-        Debug.DrawLine(origin, target, Color.red);
-        Debug.DrawLine(origin2, target2, Color.red);
-
-        CheckGround();
-
-        ApplyCustomGravity();
-
-        if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0)
+        // Detectar la liberación del botón de salto
+        if (Input.GetButtonUp("Jump") && isJumping)
         {
             Jump();
         }
+
+        // Actualizar la barra de carga
+        UpdateJumpSlider();
+
+        // Actualizar el estado del Animator
+        UpdateAnimatorState();
     }
 
-    void HandleMovementInput()
+    void StartCharging()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-
-        if (!isJumping)
-        {
-            if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
-            if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
-        }
-
-        if (canMove)
-        {
-            transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
-        }
+        isJumping = true;
+        currentJumpForce = minJumpForce;
+        chargeTime = 0f;
+        
+        // Activar el Trigger de carga en el Animator
+        animator.SetTrigger("ChargingJump");
     }
 
     void Jump()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
-            rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal") * (playerSpeed / 1.5f), jumpForce * chargeTime), ForceMode2D.Impulse);
-        else
-            rb.velocity = new Vector2(0, jumpForce * chargeTime);
+        // Aplicar la fuerza acumulada al realizar un salto
+        rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);
+        isJumping = false;
+        currentJumpForce = minJumpForce;
+        chargeTime = 0f;
 
-        isJumping = true;
-        chargeTime = 0;
-        Debug.Log("chargeTime reseteado a 0");
-        canMove = true;
+        // Reiniciar la animación y desactivar el Trigger de carga en el Animator
+        animator.SetTrigger("JumpingDown");
     }
 
-    void ChargeJump()
+    void UpdateJumpSlider()
     {
-        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping)
+         // Actualizar la barra de carga
+        if (isJumping)
         {
-            canMove = false;
-            chargeTime = chargeTime + (Time.deltaTime * 2);
-            if (chargeTime >= 1.25f) { chargeTime = 1.25f; }
-            Debug.Log($"El tiempo de carga es de: {chargeTime}");
+            chargeTime += Time.deltaTime;
+            currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeTime / maxChargeTime);
+
+            // Limitar la fuerza máxima
+            currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
+
+            // Actualizar el valor de la barra de carga
+            if (jumpSlider != null)
+            {
+                jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+            }
+        }
+    }
+    
+    void UpdateAnimatorState()
+    {
+        // Actualizar el estado del Animator basado en la velocidad vertical
+        float verticalVelocity = rb.velocity.y;
+
+        if (verticalVelocity > 0)
+        {
+            // Activar la animación de subida si la velocidad es positiva
+            animator.SetTrigger("JumpingUp");
+        }
+        else if (verticalVelocity < 0)
+        {
+            // Activar la animación de bajada si la velocidad es negativa
+            animator.SetTrigger("JumpingDown");
         }
     }
 
-    void CheckGround()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        origin = new Vector2(transform.position.x - 0.55f, transform.position.y - offset);
-        target = new Vector2(transform.position.x - 0.55f, transform.position.y - offset - lineLength);
-
-        origin2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset);
-        target2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset - lineLength);
-
-        raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
-        raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
-
-        if ((raycast.collider == null && raycast2.collider == null))
+        // Detectar colisiones con paredes y aplicar rebote
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            // Lógica cuando el jugador está en el aire
-            rb.sharedMaterial.bounciness = 5f;
-            rb.sharedMaterial.friction = 0;
-            Debug.Log("Con rebote");
-            ctt = ctt - Time.deltaTime;
-
-            if (ctt <= 0 || rb.velocity.y > 0)
-            {
-                isJumping = true;
-            }
-            else if (ctt > 0 && (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))))
-            {
-                Jump();
-                isJumping = true;
-            }
+            // Invertir la dirección horizontal
+            rb.velocity = new Vector2(-rb.velocity.x * wallBounceForce, rb.velocity.y);
         }
-        else
+
+        // Restablecer el estado de salto al tocar el suelo
+        if (collision.gameObject.CompareTag("Floor"))
         {
-            // Lógica cuando el jugador está en el suelo
-            rb.sharedMaterial.bounciness = 0;
-            rb.sharedMaterial.friction = 10;
-            Debug.Log("Sin rebote");
-
-            if (canMove)
-            {
-                transform.Translate(Vector2.right * Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime);
-            }
-
-            ctt = CoyoteTime;
             isJumping = false;
-        }
-    }
+            currentJumpForce = minJumpForce;
+            chargeTime = 0f;
 
-    void ApplyCustomGravity()
-    {
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            // Reiniciar la animación al tocar el suelo
+            animator.SetTrigger("Idle");
         }
     }
 }
