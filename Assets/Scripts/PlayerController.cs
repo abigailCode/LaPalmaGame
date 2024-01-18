@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     private float CoyoteTime = 0.1f;
     private float chargeTime = 0f;
     private float ctt;
+    private bool canMove = true;
 
     Vector2 origin;
     Vector2 target;
@@ -33,13 +35,7 @@ public class Player : MonoBehaviour
     {
         ctt = CoyoteTime;
         rb = GetComponent<Rigidbody2D>();
-
-        
-
-        
-
-
-
+        canMove = true;
     }
 
     void Update()
@@ -84,7 +80,7 @@ public class Player : MonoBehaviour
 
         if ((raycast.collider == null && raycast2.collider == null))
         {
-            rb.sharedMaterial.bounciness = 8f;
+            rb.sharedMaterial.bounciness = 0.5f;
             rb.sharedMaterial.friction = 0;
             Debug.Log("Con rebote");
             ctt = ctt - Time.deltaTime;
@@ -106,8 +102,14 @@ public class Player : MonoBehaviour
         {
             rb.sharedMaterial.bounciness = 0;
             rb.sharedMaterial.friction = 10;
-            Debug.Log("Con rebote");
-            transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
+            Debug.Log("Sin rebote");
+
+            if (canMove) {
+
+                transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
+                
+            }
+            
             ctt = CoyoteTime;
             //Debug.Log($"Tiempo de salto restante: {ctt}");
             isJumping = false;
@@ -165,19 +167,22 @@ public class Player : MonoBehaviour
         // Establecer la velocidad vertical instant�neamente al valor de salto
 
         
-        if((Input.GetAxisRaw("Horizontal")!=0))rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*playerSpeed, jumpForce*chargeTime);
+        if((Input.GetAxisRaw("Horizontal")!=0))rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/2), jumpForce*chargeTime);
         else rb.velocity = new Vector2(0, jumpForce * chargeTime);
         isJumping = true;
         chargeTime = 0;
         Debug.Log("chargeTime reseteado a 0");
+        canMove = true;
     }
 
     void ChargeJump() {
 
+        
+
         if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping) {
 
-            
-            chargeTime = chargeTime + Time.deltaTime;
+            canMove = false;
+            chargeTime = chargeTime + (Time.deltaTime*2);
             if (chargeTime >= 1.25f) { chargeTime = 1.25f;}
             Debug.Log($"El tiempo de carga es de: {chargeTime}");
 
@@ -219,7 +224,11 @@ public class Player : MonoBehaviour
             if (collision.collider.CompareTag("Plat") && (raycast.collider == null && raycast2.collider == null)) {
 
 
+                if ((collision.collider.transform.position.x < rb.transform.position.x) && rb.velocity.x >0){ rb.velocity = new Vector2(-playerSpeed/2 + 2, rb.velocity.y); }
+                else if ((collision.collider.transform.position.x > rb.transform.position.x) && rb.velocity.x < 0) { rb.velocity = new Vector2(-playerSpeed / 2 + 2, rb.velocity.y); }
+                else rb.velocity = new Vector2(0, rb.velocity.y);
 
+                /*
                 if (rb.transform.position.x < collision.gameObject.transform.position.x) { rb.velocity = new Vector2(-playerSpeed + 2, rb.velocity.y); }
                 else if ((rb.transform.position.x > collision.gameObject.transform.position.x)){ rb.velocity = new Vector2(playerSpeed - 2, rb.velocity.y); }
                 else if(rb.velocity.x == 0) rb.velocity = new Vector2(0, rb.velocity.y);
