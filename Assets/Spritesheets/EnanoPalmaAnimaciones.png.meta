@@ -171,7 +171,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 532a34ebbf3c86a4b93aa5b1bd43079d
+      spriteID: 3e3b450732c0f4a44ad76aa5782d070d
       internalID: 14440286
       vertices: []
       indices: 
@@ -192,7 +192,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6156cd011d926f4dab5b7f78bd901f8
+      spriteID: e12414a587493dc4e910e5f2f46fdf4e
       internalID: 580768503
       vertices: []
       indices: 
@@ -200,27 +200,6 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: EnanoPalmaAnimaciones_3
-      rect:
-        serializedVersion: 2
-        x: 126
-        y: 84
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22023358534e5834081edc77a26864f3
-      internalID: -1569282611
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnanoPalmaAnimaciones_4
       rect:
         serializedVersion: 2
         x: 0
@@ -234,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4aa78ec8cf0af7499695984e94a61eb
-      internalID: 602924353
+      spriteID: d516e229a49e74e4c8452f5bf1bd9d6d
+      internalID: -1569282611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaAnimaciones_5
+      name: EnanoPalmaAnimaciones_4
       rect:
         serializedVersion: 2
         x: 42
@@ -255,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01dc01992a61e404d90e9e4b48fa4046
-      internalID: -774952337
+      spriteID: 09cf28358e009c7458af464913b0fda2
+      internalID: 602924353
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaAnimaciones_6
+      name: EnanoPalmaAnimaciones_5
       rect:
         serializedVersion: 2
         x: 84
@@ -276,35 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 444b6392ecbfe964c96dde56b182a9b6
-      internalID: -293359347
+      spriteID: 996fd863ba3ddf84db0daf203207de3c
+      internalID: -774952337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnanoPalmaAnimaciones_7
-      rect:
-        serializedVersion: 2
-        x: 126
-        y: 42
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0f1ea3c77ffc7049bca6c865b98793e
-      internalID: 666532971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnanoPalmaAnimaciones_8
+      name: EnanoPalmaAnimaciones_6
       rect:
         serializedVersion: 2
         x: 0
@@ -318,7 +276,49 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85bbdcd613cd6f748859575d534cb78f
+      spriteID: 37b0d9fe06827d0489034610ac5faba8
+      internalID: -293359347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_7
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dabe14b54b75ad4ca4fc4e50d61f0dc
+      internalID: 666532971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnanoPalmaAnimaciones_8
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccc472d05ddbebe41a4676f2a1f0398c
       internalID: -1853611476
       vertices: []
       indices: 
