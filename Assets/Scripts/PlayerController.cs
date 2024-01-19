@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     //SLIDER
+    public Image slider;
+    private float sliderValue = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -182,6 +185,8 @@ public class PlayerController : MonoBehaviour
         {
             chargeTime += Time.deltaTime;
             currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeTime / maxChargeTime);
+            sliderValue = chargeTime / 1.25f;
+            slider.fillAmount = sliderValue;
 
             currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
 
