@@ -3,100 +3,81 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 5f;
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float playerSpeed = 4f;
+    [SerializeField] float minJumpForce = 5f;
+    [SerializeField] float maxJumpForce = 20f;
+    [SerializeField] float wallBounceForce = 5f;
+    [SerializeField] float chargeSpeed = 5f;
+    [SerializeField] float maxChargeTime = 2f;
+
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowJumpMultiplier = 2f;
-    [SerializeField] float lineLength = 1f;
-    [SerializeField] float offset = 1f;
+
+    [SerializeField] float lineLength = 0.1f;   // Longitud de la l�nea de detecci�n de suelo
+    [SerializeField] float offSetY = 0.66f;       // Desplazamiento vertical de la l�nea de detecci�n
+    [SerializeField] float offSetX = 0.47f;       // Desplazamiento vertical de la l�nea de detecci�n
     [SerializeField] ParticleSystem particles;
-    private float CoyoteTime = 0.1f;
-    private float chargeTime = 0f;
-    private float ctt;
-    private bool canMove = true;
-
-    Vector2 origin;
-    Vector2 target;
-
-    Vector2 origin2;
-    Vector2 target2;
-
-    RaycastHit2D raycast;
-    RaycastHit2D raycast2;
-
-    [SerializeField] bool isJumping = false;
 
     private Rigidbody2D rb;
+    [SerializeField] bool isJumping = false;
+    [SerializeField] float currentJumpForce = 0f;
+    [SerializeField] float chargeTime = 0f;
 
+    private Animator animator;
 
     void Start()
     {
-        ctt = CoyoteTime;
         rb = GetComponent<Rigidbody2D>();
-        canMove = true;
+        currentJumpForce = minJumpForce;
+        maxChargeTime = 0f;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        origin = new Vector2(transform.position.x - 0.55f, transform.position.y - offset);
-        target = new Vector2(transform.position.x - 0.55f, transform.position.y - offset - lineLength);
+        // Dibujamos la l�nea de detecci�n de suelo
+        Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
+        Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
+        Debug.DrawLine(origin1, target1, Color.blue);
+        // Dibujamos la l�nea de detecci�n de suelo
+        Vector2 origin2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY);
+        Vector2 target2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY - lineLength);
+        Debug.DrawLine(origin2, target2, Color.blue);
 
-        origin2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset);
-        target2 = new Vector2(rb.transform.localScale.x * transform.position.x + 0.45f, transform.position.y - offset - lineLength);
+        // Trazamos el Raycast2D para detectar el suelo
+        RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
+        RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
-        raycast = Physics2D.Raycast(origin, Vector2.down, lineLength);
-        raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
         
 
         ChargeJump();
-        float horizontalInput = Input.GetAxis("Horizontal");
 
 
-        if(!isJumping) {
-
-            if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
-            if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
-
-        }
-        
-
-
-        /*
-        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
+        if(!isJumping)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            //AudioManager.instance.PlaySFX("Jump");
-            //particles.Play();
-
+            if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
+            else if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
         }
-        */
 
-
-        
-
-        Debug.DrawLine(origin, target, Color.red);
-        Debug.DrawLine(origin2, target2, Color.red);
-
-
-
-        if ((raycast.collider == null && raycast2.collider == null))
+        if (raycast1.collider == null && raycast2.collider == null)
         {
             rb.sharedMaterial.bounciness = 5f;
             rb.sharedMaterial.friction = 0;
             Debug.Log("Con rebote");
-            ctt = ctt - Time.deltaTime;
             //Debug.Log($"Tiempo de salto restante: {ctt}");
 
-            if (ctt <= 0 || rb.velocity.y > 0)
+            if (rb.velocity.y > 0)
             {
                 isJumping = true;
-                // SetAnimation("Jump");
+                SetAnimation("Jump");
             }
-            else if (ctt > 0 && (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))))
+            else if (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
             {
                 Jump();
                 //rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
@@ -112,92 +93,42 @@ public class Player : MonoBehaviour
                 rb.sharedMaterial.friction = 10;
                 Debug.Log("Sin rebote");
 
-                if (canMove)
-                {
-
-                    transform.Translate(Vector2.right * horizontalInput * playerSpeed * Time.deltaTime);
-
-                }
-
-                ctt = CoyoteTime;
-                //Debug.Log($"Tiempo de salto restante: {ctt}");
+                if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
+                else rb.velocity = new Vector2(0, rb.velocity.y);
                 isJumping = false;
-
-                //if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) Jump();
-        }
-       
-
-        
-
-        // ------------------------------------------------------------------------------------------
-        // APLICACI�N AL JUEGO DE PLATAFORMAS QUE UTILIZA RAYCAST PARA DETECTAR QUE EST� EN EL SUELO
-        // ------------------------------------------------------------------------------------------
-        // Si el raycast no toca con nada el personaje est� en el aire
-        if (raycast.collider == null && raycast2.collider == null)
-        {
-           
-        }
-        else
-        {
-            // Si est� sobre una superficie pero se mueve lateralmente
-            // if (rb.velocity.x != 0) SetAnimation("Walk");
-            //else SetAnimation("Idle"); // Si est� sobre una superficie pero no se mueve
-            ctt = CoyoteTime;
-            //Debug.Log($"Tiempo de salto restante: {ctt}");
         }
 
         ApplyCustomGravity();
 
-        if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0) {
-
-            
-            if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }
-            /*if (chargeTime < 0.7f && chargeTime > 0.3f) { chargeTime = 0.7f; Debug.Log("Nv. de salto 2: x0.7"); }
-            if (chargeTime < 1.0f && chargeTime > 0.7f) { chargeTime = 1.0f; Debug.Log("Nv. de salto 3: x1.0"); }
-            if (chargeTime < 1.2f && chargeTime > 1.0f) { chargeTime = 1.0f; Debug.Log("Nv. de salto 4: x1.2"); }
-            */
-            
+        if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0)
+        {
+            if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }            
             
             Jump();
         
         }
-
     }
-
-    //void Jump()
-    //{
-    //    // Establecer la velocidad vertical instant�neamente al valor de salto
-    //    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-    //    isJumping = true;
-    //}
     void Jump()
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
-
-        
-        if((Input.GetAxisRaw("Horizontal")!=0))rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), jumpForce*chargeTime), ForceMode2D.Impulse);
-        else rb.velocity = new Vector2(0, jumpForce * chargeTime);
+        if(Input.GetAxisRaw("Horizontal")!=0) rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), minJumpForce*chargeTime), ForceMode2D.Impulse);
+        else rb.velocity = new Vector2(0, minJumpForce * chargeTime);
         isJumping = true;
         chargeTime = 0;
         Debug.Log("chargeTime reseteado a 0");
-        canMove = true;
+        isJumping = true;
     }
 
     void ChargeJump() {
-
-        
-
-        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping) {
-
-            canMove = false;
+        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping)
+        {
+            isJumping = false;
             chargeTime = chargeTime + (Time.deltaTime*2);
             if (chargeTime >= 1.25f) { chargeTime = 1.25f;}
             Debug.Log($"El tiempo de carga es de: {chargeTime}");
-
+            SetAnimation("ChargingJump");
         }
-
     }
-
     void ApplyCustomGravity()
     {
         if (rb.velocity.y < 0)
@@ -213,23 +144,16 @@ public class Player : MonoBehaviour
     }
     void SetAnimation(string name)
     {
-
-        // Obtenemos todos los par�metros del Animator
         AnimatorControllerParameter[] parametros = GetComponent<Animator>().parameters;
-
-        // Recorremos todos los par�metros y los ponemos a false
         foreach (var item in parametros) GetComponent<Animator>().SetBool(item.name, false);
-
-        // Activamos el pasado por par�metro
         GetComponent<Animator>().SetBool(name, true);
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision != null)
         {
-            if (collision.collider.CompareTag("Plat") && (raycast.collider == null && raycast2.collider == null)) {
+            if (collision.collider.CompareTag("Plat")) {
 
 
                 if ((collision.collider.transform.position.x < rb.transform.position.x) && rb.velocity.x >0){
