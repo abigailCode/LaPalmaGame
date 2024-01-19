@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float wallBounceForce = 5f;
     [SerializeField] float chargeSpeed = 5f;
     [SerializeField] float maxChargeTime = 2f;
+    [SerializeField] float moveSpeed = 5f;
 
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowJumpMultiplier = 2f;
@@ -25,26 +27,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isJumping = false;
     [SerializeField] float currentJumpForce = 0f;
     [SerializeField] float chargeTime = 0f;
+    private float horizontalInput;
+    [SerializeField] bool isFacingRight = true;
+    [SerializeField] bool isGrounded = false;
 
+    public Slider jumpSlider;
     private Animator animator;
 
     //SLIDER
-    public Image slider;
-    private float sliderValue = 0f;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentJumpForce = minJumpForce;
-        maxChargeTime = 0f;
+        chargeTime = 0f;
 
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-
         // Dibujamos la l�nea de detecci�n de suelo
         Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
         Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
@@ -58,84 +59,167 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
         RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
-
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
+        {
+            StartCharging();
+        }
         
-
-        ChargeJump();
-
-
-        if(!isJumping)
+        if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && isJumping)
         {
-            if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
-            else if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
+            Jump();
         }
 
-        if (raycast1.collider == null && raycast2.collider == null)
-        {
-            rb.sharedMaterial.bounciness = 5f;
-            rb.sharedMaterial.friction = 0;
-            Debug.Log("Con rebote");
-            //Debug.Log($"Tiempo de salto restante: {ctt}");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        if (!isJumping) Move(horizontalInput);        
 
-            if (rb.velocity.y > 0)
-            {
-                isJumping = true;
-                SetAnimation("Jump");
-            }
-            else if (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
-            {
-                Jump();
-                //rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
-                isJumping = true;
-            }
-        }
-        else
-        {
+        UpdateJumpSlider();
 
-           
-
-                rb.sharedMaterial.bounciness = 0;
-                rb.sharedMaterial.friction = 10;
-                Debug.Log("Sin rebote");
-             
-
-            if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
-                else rb.velocity = new Vector2(0, rb.velocity.y);
-                isJumping = false;
-                sliderValue = 0;
-        }
+        UpdateAnimatorState();
 
         ApplyCustomGravity();
 
-        if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0)
-        {
-            if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }            
+        // if(!isJumping)
+        // {
+        //     if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
+        //     else if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
+        // }
+
+        // if (raycast1.collider == null && raycast2.collider == null)
+        // {
+        //     rb.sharedMaterial.bounciness = 5f;
+        //     rb.sharedMaterial.friction = 0;
+        //     Debug.Log("Con rebote");
+        //     //Debug.Log($"Tiempo de salto restante: {ctt}");
+
+        //     if (rb.velocity.y > 0)
+        //     {
+        //         isJumping = true;
+        //         SetAnimation("Jump");
+        //     }
+        //     else if (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
+        //     {
+        //         Jump();
+        //         //rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        //         isJumping = true;
+        //     }
+        // }
+        // else
+        // {
+
+           
+
+        //         rb.sharedMaterial.bounciness = 0;
+        //         rb.sharedMaterial.friction = 10;
+        //         Debug.Log("Sin rebote");
+             
+
+        //     if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
+        //         else rb.velocity = new Vector2(0, rb.velocity.y);
+        //         isJumping = false;
+        //         sliderValue = 0;
+        // }
+
+
+        // if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0)
+        // {
+        //     if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }            
             
-            Jump();
+        //     Jump();
         
+        // }
+    }
+
+    void Move(float horizontalInput)
+    {
+        Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        rb.velocity = movement;
+
+        // Flip del personaje según la dirección
+        if (horizontalInput > 0 && !isFacingRight)
+        {
+            Flip();
         }
+        else if (horizontalInput < 0 && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        // Cambiar la dirección del personaje
+        isFacingRight = !isFacingRight;
+
+        // Invertir la escala en el eje X para voltear el sprite
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    void StartCharging()
+    {
+        isJumping = true;
+        currentJumpForce = minJumpForce;
+        chargeTime = 0f;
+
+        Debug.Log("Cargando salto");
     }
     void Jump()
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
-        if(Input.GetAxisRaw("Horizontal")!=0) rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), minJumpForce*chargeTime), ForceMode2D.Impulse);
-        else rb.velocity = new Vector2(0, minJumpForce * chargeTime);
-        isJumping = true;
-        chargeTime = 0;
-        Debug.Log("chargeTime reseteado a 0");
-        isJumping = true;
+        // if(Input.GetAxisRaw("Horizontal")!=0) rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), minJumpForce*chargeTime), ForceMode2D.Impulse);
+        rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);        
+        isJumping = false;
+        currentJumpForce = minJumpForce;
+        chargeTime = 0f;
+
+        animator.SetTrigger("Jump");
     }
 
-    void ChargeJump() {
-        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && !isJumping)
+    void UpdateJumpSlider()
+    {
+        if (isJumping)
         {
-            isJumping = false;
-            chargeTime = chargeTime + (Time.deltaTime*2);
-            if (chargeTime >= 1.25f) { chargeTime = 1.25f;}
-            Debug.Log($"El tiempo de carga es de: {chargeTime}");
-            SetAnimation("ChargingJump");
-            sliderValue = chargeTime / 1.25f;
-            slider.fillAmount = sliderValue;
+            chargeTime += Time.deltaTime;
+            currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeTime / maxChargeTime);
+
+            currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
+
+           if (jumpSlider != null)
+            {
+                jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+            }
+        }
+    }
+    void UpdateAnimatorState()
+    {
+        // Actualizar el estado del Animator basado en la velocidad vertical
+        float verticalVelocity = rb.velocity.y;
+        float horizontalVelocity = rb.velocity.x;
+
+        if (verticalVelocity > 0.1 && !isJumping)
+        {
+            // Activar la animación de subida si la velocidad es positiva
+            animator.SetTrigger("Jump");
+        }
+        else if (verticalVelocity < -0.1 && !isJumping)
+        {
+            // Activar la animación de bajada si la velocidad es negativa
+            animator.SetTrigger("Fall");
+        }
+        else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping)
+        {
+            // Activar la animación de movimiento si la velocidad horizontal es mayor que 0
+            animator.SetTrigger("Run");
+        }
+        else if (!isJumping && isGrounded)
+        {
+            // Activar la animación de reposo si la velocidad horizontal es 0
+            animator.SetTrigger("Idle");
+        }
+        else if (isJumping)
+        {
+            animator.SetTrigger("ChargingJump");
         }
     }
     void ApplyCustomGravity()
@@ -151,42 +235,32 @@ public class PlayerController : MonoBehaviour
             rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
-    void SetAnimation(string name)
-    {
-        AnimatorControllerParameter[] parametros = GetComponent<Animator>().parameters;
-        foreach (var item in parametros) GetComponent<Animator>().SetBool(item.name, false);
-        GetComponent<Animator>().SetBool(name, true);
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision != null)
+        // Detectar colisiones con paredes y aplicar rebote
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            if (collision.collider.CompareTag("Plat")) {
+            // Invertir la dirección horizontal
+            rb.velocity = new Vector2(-rb.velocity.x * wallBounceForce, rb.velocity.y);
+        }
 
+        // Restablecer el estado de salto al tocar el suelo
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+            currentJumpForce = minJumpForce;
+            chargeTime = 0f;
 
-                if ((collision.collider.transform.position.x < rb.transform.position.x) && rb.velocity.x >0){
-                    //rb.velocity = new Vector2(-playerSpeed/2 + 2, rb.velocity.y);
-                    rb.AddForce(new Vector2( (playerSpeed / 2f) + 2, rb.velocity.y), ForceMode2D.Impulse);
-                }
-                else if ((collision.collider.transform.position.x > rb.transform.position.x) && rb.velocity.x < 0) { 
-                    //rb.velocity = new Vector2(playerSpeed / 2 + 2, rb.velocity.y);
-                    rb.AddForce(new Vector2((-1 * playerSpeed / 2f) + 2, rb.velocity.y), ForceMode2D.Impulse);
-                }
-                else rb.velocity = new Vector2(0, rb.velocity.y);
+            isGrounded = true;
+        }
+    }
 
-                /*
-                if (rb.transform.position.x < collision.gameObject.transform.position.x) { rb.velocity = new Vector2(-playerSpeed + 2, rb.velocity.y); }
-                else if ((rb.transform.position.x > collision.gameObject.transform.position.x)){ rb.velocity = new Vector2(playerSpeed - 2, rb.velocity.y); }
-                else if(rb.velocity.x == 0) rb.velocity = new Vector2(0, rb.velocity.y);
-                else rb.velocity = new Vector2(0, rb.velocity.y);
-
-                /* if(rb.velocity.x >0) rb.velocity = new Vector2(-playerSpeed+2, rb.velocity.y);
-                 else if (rb.velocity.x < 0) rb.velocity = new Vector2(playerSpeed - 2, rb.velocity.y);
-                 
-                */
-            } 
-
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false; // Ya no está en el suelo
         }
     }
 }
