@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float chargeTime = 0f;
 
     private Animator animator;
+
+    //SLIDER
+    public Image slider;
+    private float sliderValue = 0f;
 
     void Start()
     {
@@ -92,10 +97,12 @@ public class PlayerController : MonoBehaviour
                 rb.sharedMaterial.bounciness = 0;
                 rb.sharedMaterial.friction = 10;
                 Debug.Log("Sin rebote");
+             
 
-                if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
+            if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
                 else rb.velocity = new Vector2(0, rb.velocity.y);
                 isJumping = false;
+                sliderValue = 0;
         }
 
         ApplyCustomGravity();
@@ -127,6 +134,8 @@ public class PlayerController : MonoBehaviour
             if (chargeTime >= 1.25f) { chargeTime = 1.25f;}
             Debug.Log($"El tiempo de carga es de: {chargeTime}");
             SetAnimation("ChargingJump");
+            sliderValue = chargeTime / 1.25f;
+            slider.fillAmount = sliderValue;
         }
     }
     void ApplyCustomGravity()
