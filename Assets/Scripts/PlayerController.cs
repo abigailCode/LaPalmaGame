@@ -77,56 +77,6 @@ public class PlayerController : MonoBehaviour
         UpdateAnimatorState();
 
         ApplyCustomGravity();
-
-        // if(!isJumping)
-        // {
-        //     if (horizontalInput > 0) GetComponent<SpriteRenderer>().flipX = false;
-        //     else if (horizontalInput < 0) GetComponent<SpriteRenderer>().flipX = true;
-        // }
-
-        // if (raycast1.collider == null && raycast2.collider == null)
-        // {
-        //     rb.sharedMaterial.bounciness = 5f;
-        //     rb.sharedMaterial.friction = 0;
-        //     Debug.Log("Con rebote");
-        //     //Debug.Log($"Tiempo de salto restante: {ctt}");
-
-        //     if (rb.velocity.y > 0)
-        //     {
-        //         isJumping = true;
-        //         SetAnimation("Jump");
-        //     }
-        //     else if (!isJumping && (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
-        //     {
-        //         Jump();
-        //         //rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
-        //         isJumping = true;
-        //     }
-        // }
-        // else
-        // {
-
-           
-
-        //         rb.sharedMaterial.bounciness = 0;
-        //         rb.sharedMaterial.friction = 10;
-        //         Debug.Log("Sin rebote");
-             
-
-        //     if (!isJumping) rb.velocity = new Vector2(playerSpeed * horizontalInput, rb.velocity.y);
-        //         else rb.velocity = new Vector2(0, rb.velocity.y);
-        //         isJumping = false;
-        //         sliderValue = 0;
-        // }
-
-
-        // if (!(Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && chargeTime > 0)
-        // {
-        //     if(chargeTime <0.35f) { chargeTime = 0.35f; Debug.Log("Nv. de salto 1: x0.35"); }            
-            
-        //     Jump();
-        
-        // }
     }
 
     void Move(float horizontalInput)
@@ -187,7 +137,9 @@ public class PlayerController : MonoBehaviour
 
            if (jumpSlider != null)
             {
-                jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+                // jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+                jumpSlider.value = chargeTime;
+                Debug.Log($"Barra de carga: {jumpSlider.value}");
             }
         }
     }
@@ -197,12 +149,12 @@ public class PlayerController : MonoBehaviour
         float verticalVelocity = rb.velocity.y;
         float horizontalVelocity = rb.velocity.x;
 
-        if (verticalVelocity > 0.1 && !isJumping)
+        if (verticalVelocity > 0.1 && !isJumping && !isGrounded)
         {
             // Activar la animación de subida si la velocidad es positiva
             animator.SetTrigger("Jump");
         }
-        else if (verticalVelocity < -0.1 && !isJumping)
+        else if (verticalVelocity < -0.1 && !isJumping && !isGrounded)
         {
             // Activar la animación de bajada si la velocidad es negativa
             animator.SetTrigger("Fall");
