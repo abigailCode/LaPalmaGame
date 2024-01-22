@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed = 4f;
     [SerializeField] float minJumpForce = 5f;
     [SerializeField] float maxJumpForce = 20f;
-    [SerializeField] float wallBounceForce = 5f;
     [SerializeField] float chargeSpeed = 5f;
     [SerializeField] float maxChargeTime = 2f;
     [SerializeField] float moveSpeed = 5f;
@@ -18,16 +17,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowJumpMultiplier = 2f;
 
-    [SerializeField] float lineLength = 0.1f;   // Longitud de la l�nea de detecci�n de suelo
-    [SerializeField] float offSetY = 0.66f;       // Desplazamiento vertical de la l�nea de detecci�n
-    [SerializeField] float offSetX = 0.47f;       // Desplazamiento vertical de la l�nea de detecci�n
     [SerializeField] ParticleSystem particles;
 
     private Rigidbody2D rb;
     [SerializeField] bool isJumping = false;
     [SerializeField] float currentJumpForce = 0f;
     [SerializeField] float chargeTime = 0f;
-    private float horizontalInput;
     [SerializeField] bool isFacingRight = true;
     [SerializeField] bool isGrounded = false;
     [SerializeField] bool isFalling = false;
@@ -125,14 +120,10 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        // Establecer la velocidad vertical instant�neamente al valor de salto
-        // if(Input.GetAxisRaw("Horizontal")!=0) rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), minJumpForce*chargeTime), ForceMode2D.Impulse);
         rb.AddForce(Vector2.up * currentJumpForce, ForceMode2D.Impulse);
-        // rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);        
         isJumping = false;
         currentJumpForce = minJumpForce;
         chargeTime = 0f;
-
         animator.SetTrigger("Jump");
     }
 
@@ -144,14 +135,10 @@ public class PlayerController : MonoBehaviour
             currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeTime / maxChargeTime);
             currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
 
-            // sliderValue = chargeTime / 1.25f;
-            // slider.fillAmount = sliderValue;
-
            if (jumpSlider != null)
             {
                 jumpSlider.value = Mathf.Clamp01(chargeTime / maxChargeTime);
                 slider.fillAmount = jumpSlider.value;
-                // jumpSlider.value = chargeTime;
             }
 
             if (chargeTime >= maxChargeTime)
@@ -205,6 +192,7 @@ public class PlayerController : MonoBehaviour
             if (isFalling)
             {
                 rb.velocity = Vector2.zero;
+                animator.ResetTrigger("Falling");
                 animator.SetTrigger("Suelo");
                 StartCoroutine(WaitAndIdle());
             }
