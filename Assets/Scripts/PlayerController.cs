@@ -134,16 +134,23 @@ public class PlayerController : MonoBehaviour
         {
             chargeTime += Time.deltaTime;
             currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeTime / maxChargeTime);
-            sliderValue = chargeTime / 1.25f;
-            slider.fillAmount = sliderValue;
-
             currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
+
+            // sliderValue = chargeTime / 1.25f;
+            // slider.fillAmount = sliderValue;
 
            if (jumpSlider != null)
             {
-                jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+                jumpSlider.value = Mathf.Clamp01(chargeTime / maxChargeTime);
+                slider.fillAmount = jumpSlider.value;
                 // jumpSlider.value = chargeTime;
-                Debug.Log($"Barra de carga: {jumpSlider.value}");
+                Debug.Log($"Carga cuando !null: {jumpSlider.value}");
+            }
+
+            if (chargeTime >= maxChargeTime)
+            {
+                // Lógica adicional para manejar el final del tiempo de carga si es necesario
+                // Jump();
             }
         }
     }
