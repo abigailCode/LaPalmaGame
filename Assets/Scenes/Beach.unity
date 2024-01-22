@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3882775461966865267, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -327,7 +331,7 @@ Camera:
   far clip plane: 1000
   field of view: 88.3
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -371,6 +375,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 851376164}
+--- !u!114 &1128096207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3882775461966865267, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
+  m_PrefabInstance: {fileID: 137342027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1650755479
 GameObject:
   m_ObjectHideFlags: 0
@@ -6895,10 +6910,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2967523205085519242, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: m_Material
+    - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
+      propertyPath: slider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1128096207}
     - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: jumpSlider
       value: 
@@ -6906,10 +6921,6 @@ PrefabInstance:
     - target: {fileID: 5434526362355131690, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6197138232111672525, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: m_Material
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8248264334094614980, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: camera

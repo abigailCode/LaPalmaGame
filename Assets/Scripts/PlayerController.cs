@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
         RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
-        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded)
         {
             StartCharging();
         }
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
 
         float horizontalInput = Input.GetAxis("Horizontal");
-        if (!isJumping) Move(horizontalInput);        
+        if (!isJumping && isGrounded) Move(horizontalInput);        
 
         UpdateJumpSlider();
 
@@ -114,8 +114,7 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
         currentJumpForce = minJumpForce;
         chargeTime = 0f;
-
-        Debug.Log("Cargando salto");
+        rb.velocity = Vector2.zero;
     }
     void Jump()
     {
@@ -142,8 +141,8 @@ public class PlayerController : MonoBehaviour
 
            if (jumpSlider != null)
             {
-                // jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
-                jumpSlider.value = chargeTime;
+                jumpSlider.value = (currentJumpForce - minJumpForce) / (maxJumpForce - minJumpForce);
+                // jumpSlider.value = chargeTime;
                 Debug.Log($"Barra de carga: {jumpSlider.value}");
             }
         }

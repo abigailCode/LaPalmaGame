@@ -98,7 +98,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5434526362355131690}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7fa1388a297d1024d9fe6ef5f1e0b5cb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -150,7 +150,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 7fa1388a297d1024d9fe6ef5f1e0b5cb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   isFacingRight: 1
   isGrounded: 0
   jumpSlider: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!95 &2143130143363909170
 Animator:
   serializedVersion: 5
