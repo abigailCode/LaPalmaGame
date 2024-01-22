@@ -176,7 +176,7 @@ MonoBehaviour:
   playerSpeed: 10
   minJumpForce: 5
   maxJumpForce: 20
-  wallBounceForce: 5
+  wallBounceForce: 1
   chargeSpeed: 5
   maxChargeTime: 2
   moveSpeed: 5

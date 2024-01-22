@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     [SerializeField] bool isFacingRight = true;
     [SerializeField] bool isGrounded = false;
+    [SerializeField] bool isFalling = false;
 
     public Slider jumpSlider;
     private Animator animator;
@@ -49,18 +50,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Dibujamos la l�nea de detecci�n de suelo
-        Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
-        Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
-        Debug.DrawLine(origin1, target1, Color.blue);
-        // Dibujamos la l�nea de detecci�n de suelo
-        Vector2 origin2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY);
-        Vector2 target2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY - lineLength);
-        Debug.DrawLine(origin2, target2, Color.blue);
+        // // Dibujamos la l�nea de detecci�n de suelo
+        // Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
+        // Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
+        // Debug.DrawLine(origin1, target1, Color.blue);
+        // // Dibujamos la l�nea de detecci�n de suelo
+        // Vector2 origin2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY);
+        // Vector2 target2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY - lineLength);
+        // Debug.DrawLine(origin2, target2, Color.blue);
 
-        // Trazamos el Raycast2D para detectar el suelo
-        RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
-        RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
+        // // Trazamos el Raycast2D para detectar el suelo
+        // RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
+        // RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded)
         {
@@ -84,17 +85,20 @@ public class PlayerController : MonoBehaviour
 
     void Move(float horizontalInput)
     {
-        Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-        rb.velocity = movement;
+        if (!isFalling)
+        {
+            Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+            rb.velocity = movement;
 
-        // Flip del personaje según la dirección
-        if (horizontalInput > 0 && !isFacingRight)
-        {
-            Flip();
-        }
-        else if (horizontalInput < 0 && isFacingRight)
-        {
-            Flip();
+            // Flip del personaje según la dirección
+            if (horizontalInput > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (horizontalInput < 0 && isFacingRight)
+            {
+                Flip();
+            }
         }
     }
 
@@ -111,16 +115,20 @@ public class PlayerController : MonoBehaviour
 
     void StartCharging()
     {
-        isJumping = true;
-        currentJumpForce = minJumpForce;
-        chargeTime = 0f;
-        rb.velocity = Vector2.zero;
+        if (!isFalling)
+        {
+            isJumping = true;
+            currentJumpForce = minJumpForce;
+            chargeTime = 0f;
+            rb.velocity = Vector2.zero;
+        }
     }
     void Jump()
     {
         // Establecer la velocidad vertical instant�neamente al valor de salto
         // if(Input.GetAxisRaw("Horizontal")!=0) rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal")*(playerSpeed/1.5f), minJumpForce*chargeTime), ForceMode2D.Impulse);
-        rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);        
+        rb.AddForce(Vector2.up * currentJumpForce, ForceMode2D.Impulse);
+        // rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);        
         isJumping = false;
         currentJumpForce = minJumpForce;
         chargeTime = 0f;
@@ -144,7 +152,6 @@ public class PlayerController : MonoBehaviour
                 jumpSlider.value = Mathf.Clamp01(chargeTime / maxChargeTime);
                 slider.fillAmount = jumpSlider.value;
                 // jumpSlider.value = chargeTime;
-                Debug.Log($"Carga cuando !null: {jumpSlider.value}");
             }
 
             if (chargeTime >= maxChargeTime)
@@ -160,30 +167,15 @@ public class PlayerController : MonoBehaviour
         float verticalVelocity = rb.velocity.y;
         float horizontalVelocity = rb.velocity.x;
 
-        if (verticalVelocity > 0.1 && !isJumping && !isGrounded)
-        {
-            // Activar la animación de subida si la velocidad es positiva
-            animator.SetTrigger("Jump");
-        }
-        else if (verticalVelocity < -0.1 && !isJumping && !isGrounded)
-        {
-            // Activar la animación de bajada si la velocidad es negativa
-            animator.SetTrigger("Fall");
-        }
-        else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping)
-        {
-            // Activar la animación de movimiento si la velocidad horizontal es mayor que 0
-            animator.SetTrigger("Run");
-        }
-        else if (!isJumping && isGrounded)
-        {
-            // Activar la animación de reposo si la velocidad horizontal es 0
-            animator.SetTrigger("Idle");
-        }
-        else if (isJumping)
-        {
-            animator.SetTrigger("ChargingJump");
-        }
+        if (verticalVelocity > 0.1 && !isJumping && !isGrounded) animator.SetTrigger("Jump");
+
+        else if (verticalVelocity < -0.1 && !isJumping && !isGrounded && !isFalling) animator.SetTrigger("Fall");
+
+        else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping && !isFalling) animator.SetTrigger("Run");
+
+        else if (!isJumping && isGrounded && !isFalling) animator.SetTrigger("Idle");
+
+        else if (isJumping) animator.SetTrigger("ChargingJump");
     }
     void ApplyCustomGravity()
     {
@@ -201,29 +193,43 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Detectar colisiones con paredes y aplicar rebote
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // Invertir la dirección horizontal
-            rb.velocity = new Vector2(-rb.velocity.x * wallBounceForce, rb.velocity.y);
-        }
-
         // Restablecer el estado de salto al tocar el suelo
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && !isJumping)
         {
+            isGrounded = true;
             isJumping = false;
             currentJumpForce = minJumpForce;
             chargeTime = 0f;
+            
 
-            isGrounded = true;
+            if (isFalling)
+            {
+                rb.velocity = Vector2.zero;
+                animator.SetTrigger("Suelo");
+                StartCoroutine(WaitAndIdle());
+            }
+
         }
+        else if (collision.gameObject.CompareTag("Wall") && !isGrounded)
+        {
+            isFalling = true;
+            animator.SetTrigger("Falling");
+        }
+    }
+    IEnumerator WaitAndIdle()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("Fin de corrutina");
+        animator.SetTrigger("Idle");
+        isFalling = false;
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false; // Ya no está en el suelo
+            isGrounded = false;
         }
     }
+
 }
