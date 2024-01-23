@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+        // gameObject.GetComponent<SpriteRenderer2D>.flip.x = true;
     }
 
     void StartCharging()
