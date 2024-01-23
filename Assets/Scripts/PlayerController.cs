@@ -32,7 +32,10 @@ public class PlayerController : MonoBehaviour
 
     //SLIDER
     public Image slider;
-    private float sliderValue = 0f;
+    // private float sliderValue = 0f;
+    private float offSetX = 0.47f;
+    private float offSetY = 0.67f;
+    private float lineLength = 0.15f;
 
     void Start()
     {
@@ -45,68 +48,35 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // // Dibujamos la l�nea de detecci�n de suelo
-        // Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
-        // Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
-        // Debug.DrawLine(origin1, target1, Color.blue);
-        // // Dibujamos la l�nea de detecci�n de suelo
-        // Vector2 origin2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY);
-        // Vector2 target2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY - lineLength);
-        // Debug.DrawLine(origin2, target2, Color.blue);
-
-        // // Trazamos el Raycast2D para detectar el suelo
-        // RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
-        // RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
-
-        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded)
-        {
-            StartCharging();
-        }
-        
-        if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && isJumping)
-        {
-            Jump();
-        }
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded) StartCharging();        
+        if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && isJumping) Jump();
 
         float horizontalInput = Input.GetAxis("Horizontal");
-        if (!isJumping && isGrounded) Move(horizontalInput);        
+        if (!isJumping && isGrounded && !isFalling) Move(horizontalInput);
 
+        CheckGrounded();
+        GravityController();     
         UpdateJumpSlider();
-
         UpdateAnimatorState();
-
         ApplyCustomGravity();
     }
 
     void Move(float horizontalInput)
     {
-        if (!isFalling)
-        {
-            Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-            rb.velocity = movement;
+        Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        rb.velocity = movement;
 
-            // Flip del personaje según la dirección
-            if (horizontalInput > 0 && !isFacingRight)
-            {
-                Flip();
-            }
-            else if (horizontalInput < 0 && isFacingRight)
-            {
-                Flip();
-            }
-        }
+        // Flip del personaje según la dirección
+        if (horizontalInput > 0 && !isFacingRight) Flip();
+        else if (horizontalInput < 0 && isFacingRight) Flip();
     }
 
     void Flip()
     {
-        // Cambiar la dirección del personaje
         isFacingRight = !isFacingRight;
 
-        // Invertir la escala en el eje X para voltear el sprite
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-        // gameObject.GetComponent<SpriteRenderer2D>.flip.x = true;
+        if (isFacingRight) gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        if (!isFacingRight) gameObject.GetComponent<SpriteRenderer>().flipX = true;
     }
 
     void StartCharging()
@@ -176,6 +146,37 @@ public class PlayerController : MonoBehaviour
         {
             // Aplicar gravedad reducida durante el salto mantenido para un control m�s preciso
             rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            // gameObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        }
+    }
+    void CheckGrounded()
+    {
+        // Dibujamos la l�nea de detecci�n de suelo
+        Vector2 origin1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY);
+        Vector2 target1 = new Vector2(transform.position.x - offSetX, transform.position.y - offSetY - lineLength);
+        Debug.DrawLine(origin1, target1, Color.blue);
+        // Dibujamos la l�nea de detecci�n de suelo
+        Vector2 origin2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY);
+        Vector2 target2 = new Vector2(transform.position.x + offSetX, transform.position.y - offSetY - lineLength);
+        Debug.DrawLine(origin2, target2, Color.blue);
+
+        // Trazamos el Raycast2D para detectar el suelo
+        RaycastHit2D raycast1 = Physics2D.Raycast(origin1, Vector2.down, lineLength);
+        RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
+
+        if (raycast1.collider != null || raycast2.collider != null) isGrounded = true;
+        else if (raycast1.collider == null && raycast2.collider == null) isGrounded = false;
+    }
+
+    void GravityController()
+    {
+        if (isGrounded)
+        {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+        }
+        else if (!isGrounded && !isFalling)
+        {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
         }
     }
 
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour
         // Restablecer el estado de salto al tocar el suelo
         if (collision.gameObject.CompareTag("Ground") && !isJumping)
         {
-            isGrounded = true;
+            // isGrounded = true;
             isJumping = false;
             currentJumpForce = minJumpForce;
             chargeTime = 0f;
@@ -209,6 +210,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         Debug.Log("Fin de corrutina");
+            animator.ResetTrigger("Suelo");
         animator.SetTrigger("Idle");
         isFalling = false;
     }
@@ -217,7 +219,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false;
+            // isGrounded = false;
+            isFalling = false;
         }
     }
 
