@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0002937317, y: -0.14902472}
+  m_Offset: {x: -0.0002937317, y: -0.18886137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.94270897, y: 0.95093393}
+  m_Size: {x: 0.94270897, y: 0.9281702}
   m_EdgeRadius: 0
 --- !u!50 &2967523205085519242
 Rigidbody2D:
@@ -160,7 +160,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3947742497879950514
 MonoBehaviour:
@@ -175,22 +175,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  moveSpeed: 5
   minJumpForce: 5
   maxJumpForce: 20
   chargeSpeed: 5
   maxChargeTime: 2
-  moveSpeed: 5
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   particles: {fileID: 0}
+  jumpSlider: {fileID: 2762040159298434276}
+  slider: {fileID: 3528298424152959228}
+  offSetX: 0.47
+  offSetY: 0.67
+  lineLength: 0.15
   isJumping: 0
   currentJumpForce: 0
   chargeTime: 0
   isFacingRight: 1
-  isGrounded: 0
+  isGrounded: 1
   isFalling: 0
-  jumpSlider: {fileID: 2762040159298434276}
-  slider: {fileID: 3528298424152959228}
 --- !u!95 &2143130143363909170
 Animator:
   serializedVersion: 5
@@ -219,12 +222,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5434526362355131690}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adcb25c98f459b44abba1943e01abec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!1001 &366316647743900559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,11 +266,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 877.4578
+      value: 1.3863
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 596.7039
+      value: 0.2615
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_LocalScale.x
@@ -311,11 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 513.68274
+      value: 0.038
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 340.0624
+      value: 0.717
       objectReference: {fileID: 0}
     - target: {fileID: 3264551123362670318, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -351,11 +354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177950185844482003, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -460.6998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8177950185844482003, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -304.38376
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

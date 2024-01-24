@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 851376165}
   - component: {fileID: 851376164}
   - component: {fileID: 851376163}
-  - component: {fileID: 851376166}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -265,19 +264,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &851376166
+--- !u!1 &1068157803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068157805}
+  - component: {fileID: 1068157804}
+  m_Layer: 0
+  m_Name: CameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1068157804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851376162}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1068157803}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcb25c98f459b44abba1943e01abec8, type: 3}
+  m_Script: {fileID: 11500000, guid: e0f6dbdcb5bc2f643b7038d8f040931b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 851376164}
+  player: {fileID: 1654733177}
+--- !u!4 &1068157805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068157803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.897755, y: -1.7292264, z: -0.45159832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376690870
 GameObject:
   m_ObjectHideFlags: 0
@@ -11812,6 +11843,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!4 &1654733177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8970766465759131601, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
+  m_PrefabInstance: {fileID: 631138693624522547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1841003618
 GameObject:
   m_ObjectHideFlags: 0
@@ -14690,18 +14726,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2967523205085519242, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: offSetX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: lineLength
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4936393586401381849, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: m_Camera
       value: 
@@ -14710,16 +14734,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6197138232111672525, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: m_Size.y
-      value: 0.9281702
-      objectReference: {fileID: 0}
-    - target: {fileID: 6197138232111672525, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.18886137
-      objectReference: {fileID: 0}
     - target: {fileID: 8248264334094614980, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
-      propertyPath: camera
+      propertyPath: mainCamera
       value: 
       objectReference: {fileID: 851376164}
     - target: {fileID: 8970766465759131601, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
@@ -14774,3 +14790,4 @@ SceneRoots:
   - {fileID: 631138693624522547}
   - {fileID: 851376165}
   - {fileID: 187392079}
+  - {fileID: 1068157805}
