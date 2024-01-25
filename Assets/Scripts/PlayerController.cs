@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Detection")]
     [SerializeField] private float offSetX = 0.47f;
     [SerializeField] private float offSetY = 0.67f;
-    [SerializeField] private float lineLength = 0.15f;
+    [SerializeField] private float lineLength = 0.10f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (!isJumping && isGrounded && !isFalling) Move(horizontalInput);
 
         CheckGrounded();
-        GravityController();  
+        // GravityController();  
         UpdateJumpSlider();
         UpdateAnimatorState();
         ApplyCustomGravity();
@@ -74,12 +74,15 @@ public class PlayerController : MonoBehaviour
     }
     void Move(float horizontalInput)
     {
-        Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
-        rb.velocity = movement;
+        if (!isJumping)
+        {
+            Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+            rb.velocity = movement;
 
-        // Flip del personaje según la dirección
-        if (horizontalInput > 0 && !isFacingRight) Flip();
-        else if (horizontalInput < 0 && isFacingRight) Flip();
+            // Flip del personaje según la dirección
+            if (horizontalInput > 0 && !isFacingRight) Flip();
+            else if (horizontalInput < 0 && isFacingRight) Flip();
+        }
     }
 
     void Flip()
@@ -100,7 +103,16 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        rb.AddForce(Vector2.up * currentJumpForce, ForceMode2D.Impulse);
+        float angle = 45f; // Ángulo deseado
+        float angleRad = angle * Mathf.Deg2Rad; // Convertir el ángulo a radianes
+        float jumpSpeed = currentJumpForce; // La velocidad de salto será igual a la fuerza actual de salto
+
+        // Calcular las velocidades horizontal y vertical para obtener un ángulo de 45 grados
+        float horizontalSpeed = jumpSpeed * Mathf.Cos(angleRad);
+        float verticalSpeed = jumpSpeed * Mathf.Sin(angleRad);
+
+        rb.velocity = new Vector2(horizontalSpeed * (isFacingRight ? 1 : -1), verticalSpeed);
+
         isJumping = false;
         currentJumpForce = minJumpForce;
         chargeTime = 0f;
@@ -164,13 +176,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = (raycast1.collider != null || raycast2.collider != null);
     }
 
-    void GravityController()
-    {
-        if (isGrounded)
-            rb.gravityScale = 0f;
-        else if (!isGrounded && !isFalling)
-            rb.gravityScale = 1f;
-    }
+    // void GravityController()
+    // {
+    //     if (isGrounded)
+    //         // rb.gravityScale = 0f;
+    //     else if (!isGrounded && !isFalling)
+    //         // rb.gravityScale = 1f;
+    // }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
