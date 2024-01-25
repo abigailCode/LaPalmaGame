@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 1104536510}
   m_Layer: 0
   m_Name: ColliderSuelo
-  m_TagString: Floor
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49501,6 +49501,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2967523205085519242, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
+      propertyPath: m_GravityScale
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5434526362355131690, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: m_Name
       value: Player

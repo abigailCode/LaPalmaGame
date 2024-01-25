@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (!isJumping && isGrounded && !isFalling) Move(horizontalInput);
 
         CheckGrounded();
-        GravityController();  
+        // GravityController();  
         UpdateJumpSlider();
         UpdateAnimatorState();
         ApplyCustomGravity();
@@ -164,13 +164,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = (raycast1.collider != null || raycast2.collider != null);
     }
 
-    void GravityController()
-    {
-        if (isGrounded)
-            rb.gravityScale = 0f;
-        else if (!isGrounded && !isFalling)
-            rb.gravityScale = 1f;
-    }
+    // void GravityController()
+    // {
+    //     if (isGrounded)
+    //         // rb.gravityScale = 0f;
+    //     else if (!isGrounded && !isFalling)
+    //         // rb.gravityScale = 1f;
+    // }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
