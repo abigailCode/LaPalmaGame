@@ -16857,6 +16857,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &989808352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 989808354}
+  - component: {fileID: 989808353}
+  m_Layer: 0
+  m_Name: CameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &989808353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989808352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f6dbdcb5bc2f643b7038d8f040931b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 583699458}
+--- !u!4 &989808354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989808352}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.897755, y: -1.7292264, z: -0.45159832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &989813782 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2540549060378427243, guid: 9eb555a18c5a1d046bccc61781116cf9, type: 3}
@@ -16899,7 +16944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcb25c98f459b44abba1943e01abec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1183952816}
+  mainCamera: {fileID: 0}
 --- !u!81 &1183952815
 AudioListener:
   m_ObjectHideFlags: 0
@@ -17968,3 +18013,4 @@ SceneRoots:
   - {fileID: 3967818}
   - {fileID: 1183952817}
   - {fileID: 1332523445}
+  - {fileID: 989808354}
