@@ -53,15 +53,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        CheckGrounded();
+        UpdateAnimatorState();
+        UpdateJumpSlider();
         HandleInput();
 
         float horizontalInput = Input.GetAxis("Horizontal");
         if (!isJumping && isGrounded && !isFalling) Move(horizontalInput);
 
-        CheckGrounded();
         // GravityController();  
-        UpdateJumpSlider();
-        UpdateAnimatorState();
         ApplyCustomGravity();
     }
 
@@ -163,6 +163,8 @@ public class PlayerController : MonoBehaviour
         else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping && !isFalling) animator.SetTrigger("Run");
         else if (!isJumping && isGrounded && !isFalling) animator.SetTrigger("Idle");
         else if (isJumping) animator.SetTrigger("ChargingJump");
+
+        if (!isFalling) animator.ResetTrigger("Suelo");
     }
     void ApplyCustomGravity()
     {
@@ -222,10 +224,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WaitAndIdleAfterFalling()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         isFalling = false;
         animator.ResetTrigger("Suelo");
-        animator.SetTrigger("Idle");
+        // animator.SetTrigger("Idle");
     }
 
     void OnCollisionExit2D(Collision2D collision)
