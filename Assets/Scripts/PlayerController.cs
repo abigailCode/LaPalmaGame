@@ -72,7 +72,10 @@ public class PlayerController : MonoBehaviour
             StartCharging();
 
         if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && isJumping)
+        {
+            AudioManager.instance.PlaySFX("Jump");
             Jump();
+        }
     }
     void Move(float horizontalInput)
     {
@@ -112,7 +115,6 @@ public class PlayerController : MonoBehaviour
 
         // Calcular las velocidades horizontal y vertical para obtener un ángulo de 45 grados
         float horizontalInput = Input.GetAxis("Horizontal");
-        AudioManager.instance.PlaySFX("Jump");
 
         float horizontalSpeed = 0f;
 
@@ -153,6 +155,7 @@ public class PlayerController : MonoBehaviour
 
             if (chargeTime >= maxChargeTime)
             {
+                AudioManager.instance.PlaySFX("WEHOO");
                 Jump();
             }
         }
@@ -214,12 +217,14 @@ public class PlayerController : MonoBehaviour
             currentJumpForce = minJumpForce;
             chargeTime = 0f;
 
+            if (!isFalling) AudioManager.instance.PlaySFX("Hit");
+
             if (isFalling)
             {
                 rb.velocity = Vector2.zero;
                 animator.ResetTrigger("Falling");
                 animator.SetTrigger("Suelo");
-                AudioManager.instance.PlaySFX("Fall");
+                AudioManager.instance.PlaySFX("Auch");
                 StartCoroutine(WaitAndIdleAfterFalling());  
             }
 

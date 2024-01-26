@@ -54,6 +54,8 @@ public class AudioManager : MonoBehaviour
         sfxClips["Charging"] = Resources.Load<AudioClip>("SFX/cargasalto");
         sfxClips["Jump"] = Resources.Load<AudioClip>("SFX/salto");
         sfxClips["Boton"] = Resources.Load<AudioClip>("SFX/boton");
+        sfxClips["Auch"] = Resources.Load<AudioClip>("SFX/Voices/AuchFalling");
+        sfxClips["WEHOO"] = Resources.Load<AudioClip>("SFX/Voices/Weehoo");
     }
 
     // M�todo privado para cargar la m�sica de fondo directamente desde las carpetas
