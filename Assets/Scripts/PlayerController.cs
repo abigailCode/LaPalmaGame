@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isFalling = false;
     void Start()
     {
+        AudioManager.instance.PlaySFX("Respawn");
         rb = GetComponent<Rigidbody2D>();
         currentJumpForce = minJumpForce;
         chargeTime = 0f;
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
             currentJumpForce = minJumpForce;
             chargeTime = 0f;
             rb.velocity = Vector2.zero;
+            AudioManager.instance.PlaySFX("Charging");
         }
     }
     void Jump()
@@ -110,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
         // Calcular las velocidades horizontal y vertical para obtener un ángulo de 45 grados
         float horizontalInput = Input.GetAxis("Horizontal");
+        AudioManager.instance.PlaySFX("Jump");
+
         float horizontalSpeed = 0f;
 
         float directionX = horizontalInput > 0 ? 1 : (horizontalInput < 0 ? -1 : (isFacingRight ? 1 : -1));
@@ -189,6 +193,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycast2 = Physics2D.Raycast(origin2, Vector2.down, lineLength);
 
         isGrounded = (raycast1.collider != null || raycast2.collider != null);
+
     }
 
     // void GravityController()
@@ -204,27 +209,32 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") && !isJumping)
         {
             isGrounded = true;
+            // AudioManager.instance.PlaySFX("Hit");
             isJumping = false;
             currentJumpForce = minJumpForce;
             chargeTime = 0f;
 
             if (isFalling)
+            {
                 rb.velocity = Vector2.zero;
                 animator.ResetTrigger("Falling");
                 animator.SetTrigger("Suelo");
+                AudioManager.instance.PlaySFX("Fall");
                 StartCoroutine(WaitAndIdleAfterFalling());  
+            }
 
         }
         else if (collision.gameObject.CompareTag("Wall") && !isGrounded)
         {
             isFalling = true;
             animator.SetTrigger("Falling");
+            AudioManager.instance.PlaySFX("Hit");
         }
     }
 
     IEnumerator WaitAndIdleAfterFalling()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         isFalling = false;
         animator.ResetTrigger("Suelo");
         // animator.SetTrigger("Idle");
@@ -241,19 +251,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("GoalBeach")) {
-
+        if (collision.CompareTag("GoalBeach")) 
             SceneController.instance.LoadScene("Houses");
-        
-        }
-
         if (collision.CompareTag("GoalHouses"))
-        {
-
+            AudioManager.instance.PlayMusic("MenuTheme"); 
             SceneController.instance.LoadScene("Stars");
-
-        }
-
         if (collision.CompareTag("GoalSky"))
         {
 

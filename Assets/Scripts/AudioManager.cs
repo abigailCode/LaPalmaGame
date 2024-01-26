@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // ---------------------------------------------------------------------------------
-// SCRIPT PARA LA GESTIÓN DE AUDIO (vinculado a un GameObject vacío "AudioManager")
+// SCRIPT PARA LA GESTIï¿½N DE AUDIO (vinculado a un GameObject vacï¿½o "AudioManager")
 // ---------------------------------------------------------------------------------
 public class AudioManager : MonoBehaviour
 {
 
-    // Instancia única del AudioManager (porque es una clase Singleton) STATIC
+    // Instancia ï¿½nica del AudioManager (porque es una clase Singleton) STATIC
     public static AudioManager instance;
 
     // Se crean dos AudioSources diferentes para que se puedan
-    // reproducir los efectos y la música de fondo al mismo tiempo
+    // reproducir los efectos y la mï¿½sica de fondo al mismo tiempo
     public AudioSource sfxSource; // Componente AudioSource para efectos de sonido
-    public AudioSource musicSource; // Componente AudioSource para la música de fondo
+    public AudioSource musicSource; // Componente AudioSource para la mï¿½sica de fondo
 
-    // En vez de usar un vector de AudioClips (que podría ser) vamos a utilizar un Diccionario
-    // en el que cargaremos directamente los recursos desde la jerarquía del proyecto
+    // En vez de usar un vector de AudioClips (que podrï¿½a ser) vamos a utilizar un Diccionario
+    // en el que cargaremos directamente los recursos desde la jerarquï¿½a del proyecto
     // Cada entrada del diccionario tiene una string como clave y un AudioClip como valor
     public Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> musicClips = new Dictionary<string, AudioClip>();
 
-    // Método Awake que se llama al inicio antes de que se active el objeto. Útil para inicializar
-    // variables u objetos que serán llamados por otros scripts (game managers, clases singleton, etc).
+    // Mï¿½todo Awake que se llama al inicio antes de que se active el objeto. ï¿½til para inicializar
+    // variables u objetos que serï¿½n llamados por otros scripts (game managers, clases singleton, etc).
     private void Awake()
     {
 
         // ----------------------------------------------------------------
-        // AQUÍ ES DONDE SE DEFINE EL COMPORTAMIENTO DE LA CLASE SINGLETON
+        // AQUï¿½ ES DONDE SE DEFINE EL COMPORTAMIENTO DE LA CLASE SINGLETON
         // Garantizamos que solo exista una instancia del AudioManager
         // Si no hay instancias previas se asigna la actual
         // Si hay instancias se destruye la nueva
@@ -44,25 +44,28 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    // Método privado para cargar los efectos de sonido directamente desde las carpetas
+    // Mï¿½todo privado para cargar los efectos de sonido directamente desde las carpetas
     private void LoadSFXClips()
     {
-        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIÓN DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/SFX
-        sfxClips["Jump"] = Resources.Load<AudioClip>("SFX/Jump");
-        sfxClips["CollectCoin"] = Resources.Load<AudioClip>("SFX/Collect_Coin");
-        sfxClips["Hit"] = Resources.Load<AudioClip>("SFX/Hit");
+        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIï¿½N DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/SFX
+        sfxClips["Respawn"] = Resources.Load<AudioClip>("SFX/apariciondeplayer");
+        sfxClips["Fall"] = Resources.Load<AudioClip>("SFX/caidasuelo");
+        sfxClips["Hit"] = Resources.Load<AudioClip>("SFX/choquepared");
+        sfxClips["Charging"] = Resources.Load<AudioClip>("SFX/cargasalto");
+        sfxClips["Jump"] = Resources.Load<AudioClip>("SFX/salto");
+        sfxClips["Boton"] = Resources.Load<AudioClip>("SFX/boton");
     }
 
-    // Método privado para cargar la música de fondo directamente desde las carpetas
+    // Mï¿½todo privado para cargar la mï¿½sica de fondo directamente desde las carpetas
     private void LoadMusicClips()
     {
-        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIÓN DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/Music
-        musicClips["MainTheme"] = Resources.Load<AudioClip>("Music/Main_Theme");
-        musicClips["InvincibilityTheme"] = Resources.Load<AudioClip>("Music/Invincibility_Theme");
-        musicClips["LoseALife"] = Resources.Load<AudioClip>("Music/Lost_A_Life");
+        // Los recursos (ASSETS) que se cargan en TIEMPO DE EJECUCIï¿½N DEBEN ESTAR DENTRO de una carpeta denominada /Assets/Resources/Music
+        musicClips["Theme1-2"] = Resources.Load<AudioClip>("Music/beachyhouses");
+        musicClips["BeachSounds"] = Resources.Load<AudioClip>("Music/sonidoambientalplaya");
+        musicClips["MenuTheme"] = Resources.Load<AudioClip>("Music/menuystars");
     }
 
-    // Método de la clase singleton para reproducir efectos de sonido
+    // Mï¿½todo de la clase singleton para reproducir efectos de sonido
     public void PlaySFX(string clipName)
     {
         if (sfxClips.ContainsKey(clipName))
@@ -70,10 +73,10 @@ public class AudioManager : MonoBehaviour
             sfxSource.clip = sfxClips[clipName];
             sfxSource.Play();
         }
-        else Debug.LogWarning("El AudioClip " + clipName + " no se encontró en el diccionario de sfxClips.");
+        else Debug.LogWarning("El AudioClip " + clipName + " no se encontrï¿½ en el diccionario de sfxClips.");
     }
 
-    // Método de la clase singleton para reproducir música de fondo
+    // Mï¿½todo de la clase singleton para reproducir mï¿½sica de fondo
     public void PlayMusic(string clipName)
     {
         if (musicClips.ContainsKey(clipName))
@@ -81,16 +84,9 @@ public class AudioManager : MonoBehaviour
             musicSource.clip = musicClips[clipName];
             musicSource.Play();
         }
-        else Debug.LogWarning("El AudioClip " + clipName + " no se encontró en el diccionario de musicClips.");
-
-        if(clipName == "MainTheme")
-        {
-            musicSource.loop = true;
-        }
-        else
-        {
-            musicSource.loop = false;
-        }
+        else Debug.LogWarning("El AudioClip " + clipName + " no se encontrï¿½ en el diccionario de musicClips.");
+       
+        musicSource.loop = true;
     }
 
 }
