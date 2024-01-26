@@ -176,10 +176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 10
   moveSpeed: 5
-  minJumpForce: 5
-  maxJumpForce: 20
+  minJumpForce: 10
+  maxJumpForce: 30
   chargeSpeed: 5
-  maxChargeTime: 2
+  maxChargeTime: 1
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   particles: {fileID: 0}

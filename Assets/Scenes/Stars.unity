@@ -47166,8 +47166,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
+      propertyPath: chargeSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: maxJumpForce
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947742497879950514, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
+      propertyPath: maxChargeTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5434526362355131690, guid: e2aade9422ac1ee43bb9d02160151a98, type: 3}
       propertyPath: m_Name
