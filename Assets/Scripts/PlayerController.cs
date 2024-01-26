@@ -239,4 +239,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("GoalBeach")) {
+
+            SceneController.instance.LoadScene("Houses");
+        
+        }
+
+        if (collision.CompareTag("GoalHouses"))
+        {
+
+            SceneController.instance.LoadScene("Stars");
+
+        }
+
+        if (collision.CompareTag("GoalSky"))
+        {
+
+            //SceneController.instance.LoadScene("Houses");
+
+        }
+    }
+
 }
