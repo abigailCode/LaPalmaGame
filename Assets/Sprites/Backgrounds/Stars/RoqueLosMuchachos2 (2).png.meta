@@ -1,0 +1,593 @@
+fileFormatVersion: 2
+guid: e7114c79d974cd84d887cc55f60fe01b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f05180e0abc265459dbab7d83f4cfff
+      internalID: -1108431030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_1
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 2
+        width: 1283
+        height: 716
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f86106baf5376044a5f2d3111850bf5
+      internalID: -1171009855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_2
+      rect:
+        serializedVersion: 2
+        x: 2566
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 512f19569058ad640b937336472705d2
+      internalID: -1569610468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_3
+      rect:
+        serializedVersion: 2
+        x: 3849
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c603fac6a779f47bf8262658f96ac8
+      internalID: 1568156106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_4
+      rect:
+        serializedVersion: 2
+        x: 5132
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58fc42c2c78be2d46b5e95872481df0e
+      internalID: 2096512673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_5
+      rect:
+        serializedVersion: 2
+        x: 6415
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4d0ef7f143a484391527f4593953f4
+      internalID: -1786419503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_6
+      rect:
+        serializedVersion: 2
+        x: 7698
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac0f153ae91b9e44ad3f96736f69e25
+      internalID: 1604540621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_7
+      rect:
+        serializedVersion: 2
+        x: 8981
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 063be1ed959192f449faa492f79459e5
+      internalID: 19514178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_8
+      rect:
+        serializedVersion: 2
+        x: 10264
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be2898c9f7664664c9460d065f62957a
+      internalID: 1376995113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_9
+      rect:
+        serializedVersion: 2
+        x: 11547
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac8f797031c3bf4b8cdd5126240409d
+      internalID: 2068582099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_10
+      rect:
+        serializedVersion: 2
+        x: 12830
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be12c094d053ee743a4576d0bf437300
+      internalID: 22958590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_11
+      rect:
+        serializedVersion: 2
+        x: 14113
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa5403b4cbb0d24a85ea4c30b9f4011
+      internalID: -211183962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_12
+      rect:
+        serializedVersion: 2
+        x: 15396
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a795ef47395be24f8c9fbcf1f5419eb
+      internalID: -1033050516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_13
+      rect:
+        serializedVersion: 2
+        x: 16679
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e86b1638468a72a4fbf75a2be54bb34d
+      internalID: -2129407665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_14
+      rect:
+        serializedVersion: 2
+        x: 17962
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208328162bffc7842aacb523f55f69ae
+      internalID: -1429610883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_15
+      rect:
+        serializedVersion: 2
+        x: 19245
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ee022924e4f2b48b7687f26cfbc57f
+      internalID: -2071984016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_16
+      rect:
+        serializedVersion: 2
+        x: 20528
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10efc223d0fe2824e830ae570fa6bd28
+      internalID: -1513835450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_17
+      rect:
+        serializedVersion: 2
+        x: 21811
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c61d97f1a988ea4b95542947ba969e8
+      internalID: 267776929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_18
+      rect:
+        serializedVersion: 2
+        x: 23094
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbf6c3a47da1e74f8826e993154472d
+      internalID: -1450290208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueLosMuchachos2 (2)_19
+      rect:
+        serializedVersion: 2
+        x: 24377
+        y: 0
+        width: 1283
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e333d0a40976e714397c38d18010af91
+      internalID: -283061183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: aa7dda7d89ab928459424ffd143d648b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      RoqueLosMuchachos2 (2)_0: -1108431030
+      RoqueLosMuchachos2 (2)_1: -1171009855
+      RoqueLosMuchachos2 (2)_10: 22958590
+      RoqueLosMuchachos2 (2)_11: -211183962
+      RoqueLosMuchachos2 (2)_12: -1033050516
+      RoqueLosMuchachos2 (2)_13: -2129407665
+      RoqueLosMuchachos2 (2)_14: -1429610883
+      RoqueLosMuchachos2 (2)_15: -2071984016
+      RoqueLosMuchachos2 (2)_16: -1513835450
+      RoqueLosMuchachos2 (2)_17: 267776929
+      RoqueLosMuchachos2 (2)_18: -1450290208
+      RoqueLosMuchachos2 (2)_19: -283061183
+      RoqueLosMuchachos2 (2)_2: -1569610468
+      RoqueLosMuchachos2 (2)_3: 1568156106
+      RoqueLosMuchachos2 (2)_4: 2096512673
+      RoqueLosMuchachos2 (2)_5: -1786419503
+      RoqueLosMuchachos2 (2)_6: 1604540621
+      RoqueLosMuchachos2 (2)_7: 19514178
+      RoqueLosMuchachos2 (2)_8: 1376995113
+      RoqueLosMuchachos2 (2)_9: 2068582099
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
