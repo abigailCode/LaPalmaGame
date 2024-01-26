@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
         if (verticalVelocity > 0.1 && !isJumping && !isGrounded) animator.SetTrigger("Jump");
         else if (verticalVelocity < -0.1 && !isJumping && !isGrounded && !isFalling) animator.SetTrigger("Fall");
-        else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping && !isFalling) animator.SetTrigger("Run");
+        else if (Math.Abs(horizontalVelocity) > 0.1 && isGrounded && !isJumping && !isFalling) animator.SetTrigger("Run");
         else if (!isJumping && isGrounded && !isFalling) animator.SetTrigger("Idle");
         else if (isJumping) animator.SetTrigger("ChargingJump");
 
