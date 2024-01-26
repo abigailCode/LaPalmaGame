@@ -8,7 +8,10 @@ TagManager:
   - Plat
   - Ground
   - Wall
-  - Goal
+  - GoalBeach
+  - GoalHouses
+  - GoalForest
+  - GoalSky
   layers:
   - Default
   - TransparentFX

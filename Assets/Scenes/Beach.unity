@@ -15315,6 +15315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal
       objectReference: {fileID: 0}
+    - target: {fileID: 7830590330534592088, guid: 6b10428a0c3e16e40b7ab74af89c9a90, type: 3}
+      propertyPath: m_TagString
+      value: GoalBeach
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
