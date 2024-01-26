@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minJumpForce = 5f;
     [SerializeField] float maxJumpForce = 20f;
     [SerializeField] float chargeSpeed = 5f;
-    [SerializeField] float maxChargeTime = 2f;
+    [SerializeField] float maxChargeTime = 1f;
 
     [Header("Gravity Settings")]
     [SerializeField] float fallMultiplier = 2.5f;
@@ -52,15 +53,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        CheckGrounded();
+        UpdateAnimatorState();
+        UpdateJumpSlider();
         HandleInput();
 
         float horizontalInput = Input.GetAxis("Horizontal");
         if (!isJumping && isGrounded && !isFalling) Move(horizontalInput);
 
-        CheckGrounded();
         // GravityController();  
-        UpdateJumpSlider();
-        UpdateAnimatorState();
         ApplyCustomGravity();
     }
 
@@ -103,15 +104,22 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        float angle = 45f; // Ángulo deseado
+        float angle = 30f; // Ángulo deseado
         float angleRad = angle * Mathf.Deg2Rad; // Convertir el ángulo a radianes
         float jumpSpeed = currentJumpForce; // La velocidad de salto será igual a la fuerza actual de salto
 
         // Calcular las velocidades horizontal y vertical para obtener un ángulo de 45 grados
-        float horizontalSpeed = jumpSpeed * Mathf.Cos(angleRad);
-        float verticalSpeed = jumpSpeed * Mathf.Sin(angleRad);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalSpeed = 0f;
 
-        rb.velocity = new Vector2(horizontalSpeed * (isFacingRight ? 1 : -1), verticalSpeed);
+        float directionX = horizontalInput > 0 ? 1 : (horizontalInput < 0 ? -1 : (isFacingRight ? 1 : -1));
+
+        if (Mathf.Abs(horizontalInput) > 0)
+        {
+            horizontalSpeed = jumpSpeed * Mathf.Cos(angleRad);
+        }
+
+        rb.velocity = new Vector2(horizontalSpeed * directionX, jumpSpeed * Mathf.Sin(angleRad));
 
         isJumping = false;
         currentJumpForce = minJumpForce;
@@ -138,6 +146,11 @@ public class PlayerController : MonoBehaviour
                 jumpSlider.value = Mathf.Clamp01(chargeTime / maxChargeTime);
                 slider.fillAmount = jumpSlider.value;
             }
+
+            if (chargeTime >= maxChargeTime)
+            {
+                Jump();
+            }
         }
     }
     void UpdateAnimatorState()
@@ -150,6 +163,8 @@ public class PlayerController : MonoBehaviour
         else if (Math.Abs(horizontalVelocity) > 0 && isGrounded && !isJumping && !isFalling) animator.SetTrigger("Run");
         else if (!isJumping && isGrounded && !isFalling) animator.SetTrigger("Idle");
         else if (isJumping) animator.SetTrigger("ChargingJump");
+
+        if (!isFalling) animator.ResetTrigger("Suelo");
     }
     void ApplyCustomGravity()
     {
@@ -209,10 +224,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WaitAndIdleAfterFalling()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         isFalling = false;
         animator.ResetTrigger("Suelo");
-        animator.SetTrigger("Idle");
+        // animator.SetTrigger("Idle");
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -221,6 +236,29 @@ public class PlayerController : MonoBehaviour
         {
             // isGrounded = false;
             isFalling = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("GoalBeach")) {
+
+            SceneController.instance.LoadScene("Houses");
+        
+        }
+
+        if (collision.CompareTag("GoalHouses"))
+        {
+
+            SceneController.instance.LoadScene("Stars");
+
+        }
+
+        if (collision.CompareTag("GoalSky"))
+        {
+
+            //SceneController.instance.LoadScene("Houses");
+
         }
     }
 
