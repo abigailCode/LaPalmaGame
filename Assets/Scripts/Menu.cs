@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -10,6 +11,29 @@ public class Menu : MonoBehaviour
 
     private void Start() {
         AudioManager.instance.PlayMusic("MenuTheme");
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            SceneController.instance.LoadScene("Menu");
+            AudioManager.instance.PlayMusic("MenuTheme");
+        } 
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SceneController.instance.LoadScene("Beach");
+            AudioManager.instance.PlayMusic("Theme1-2");
+        } 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SceneController.instance.LoadScene("Houses");
+            AudioManager.instance.PlayMusic("Theme1-2");
+        }  
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SceneController.instance.LoadScene("Stars");
+            AudioManager.instance.PlayMusic("MenuTheme");
+        }    
     }
     public void StartGame()
     {

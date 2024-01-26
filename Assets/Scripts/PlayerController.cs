@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
 
         // GravityController();  
         ApplyCustomGravity();
+
+        if (Input.GetKeyDown(KeyCode.V)) SceneController.instance.LoadScene("Beach");
+        if (Input.GetKeyDown(KeyCode.B)) SceneController.instance.LoadScene("Houses");
+        if (Input.GetKeyDown(KeyCode.N)) SceneController.instance.LoadScene("Stars");
     }
 
     private void HandleInput()
@@ -259,13 +263,13 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("GoalBeach")) 
             SceneController.instance.LoadScene("Houses");
         if (collision.CompareTag("GoalHouses"))
+        {
             AudioManager.instance.PlayMusic("MenuTheme"); 
             SceneController.instance.LoadScene("Stars");
+        }
         if (collision.CompareTag("GoalSky"))
         {
-
             //SceneController.instance.LoadScene("Houses");
-
         }
     }
 
