@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("GoalHouses"))
         {
             AudioManager.instance.PlayMusic("MenuTheme"); 
-            SceneController.instance.LoadScene("Stars");
+            SceneController.instance.LoadScene("StarsFinal");
         }
         if (collision.CompareTag("GoalSky"))
         {

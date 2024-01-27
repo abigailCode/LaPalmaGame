@@ -31,7 +31,7 @@ public class Menu : MonoBehaviour
         }  
         if (Input.GetKeyDown(KeyCode.N))
         {
-            SceneController.instance.LoadScene("Stars");
+            SceneController.instance.LoadScene("StarsFinal");
             AudioManager.instance.PlayMusic("MenuTheme");
         }    
     }

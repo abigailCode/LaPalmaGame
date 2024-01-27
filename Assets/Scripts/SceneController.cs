@@ -30,6 +30,8 @@ public class SceneController : MonoBehaviour
     // Método para cargar una nueva escena por nombre
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+
+        if(sceneName.Equals("Stars")) SceneManager.LoadScene("StarsFinal");
+        else SceneManager.LoadScene(sceneName);
     }
 }
