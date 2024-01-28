@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7114c79d974cd84d887cc55f60fe01b
+guid: 2539cb37d16675c4699361232e73fef8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,8 +69,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
-    resizeAlgorithm: 1
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -81,33 +81,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -136,391 +110,391 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_0
+      name: RoqueTest2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3840
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8dc789daa32f5e4aa83993144b67835
+      internalID: -2080622594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_1
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 3840
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0809e158dbd38944988b4af71b2841d3
+      internalID: 1171606369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_2
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 3840
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e090868f78e1af740a36c089fffff67f
+      internalID: -490720314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3200
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7bddf66ab906374a8771a59e65613a4
+      internalID: 1836743936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_4
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 3200
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62e51a9ea9f687547914e71277ca1c65
+      internalID: 1779331360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_5
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 3200
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eada98907d4765a45ab900e078e1a2c8
+      internalID: 48480399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2560
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de61377de2ac57e4c859b8716ceb1554
+      internalID: -1687609779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_7
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 2560
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56cf39d5f1a6ec241b0509319f693a26
+      internalID: -1668324014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_8
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 2560
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b45c03862618684cbd41ae3cefeec2d
+      internalID: -226608953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5a5f51be4f5aa047927239516333994
+      internalID: 410788323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_10
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 1920
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7667a98d941bb44b8879efdebd79ac
+      internalID: -1980840600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_11
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 1920
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565cb661cc6b2ed47a1f2f59fd23b8b4
+      internalID: 676433929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1280
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4ea1997f3f17024eab9acc4a26620eb
+      internalID: 1948723628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_13
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 1280
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23aa5f7796d07a945a26370ae9c356ec
+      internalID: -2146537564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_14
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 1280
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eccf01e6cca336a4ab3dc34d948bf9e3
+      internalID: -990964639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e40b63bede2fb43b3277ef10497c25
+      internalID: -1885977415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_16
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 640
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8dcebcdf76aead4394cc70c1064c1da
+      internalID: 856984850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_17
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 640
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b72824247b94b9d4cba75855e96706d2
+      internalID: -1104754342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_18
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f05180e0abc265459dbab7d83f4cfff
-      internalID: -1108431030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_1
-      rect:
-        serializedVersion: 2
-        x: 1283
-        y: 2
-        width: 1283
-        height: 716
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f86106baf5376044a5f2d3111850bf5
-      internalID: -1171009855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_2
-      rect:
-        serializedVersion: 2
-        x: 2566
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 512f19569058ad640b937336472705d2
-      internalID: -1569610468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_3
-      rect:
-        serializedVersion: 2
-        x: 3849
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 08c603fac6a779f47bf8262658f96ac8
-      internalID: 1568156106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_4
-      rect:
-        serializedVersion: 2
-        x: 5132
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58fc42c2c78be2d46b5e95872481df0e
-      internalID: 2096512673
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_5
-      rect:
-        serializedVersion: 2
-        x: 6415
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca4d0ef7f143a484391527f4593953f4
-      internalID: -1786419503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_6
-      rect:
-        serializedVersion: 2
-        x: 7698
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ac0f153ae91b9e44ad3f96736f69e25
-      internalID: 1604540621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_7
-      rect:
-        serializedVersion: 2
-        x: 8981
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 063be1ed959192f449faa492f79459e5
-      internalID: 19514178
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_8
-      rect:
-        serializedVersion: 2
-        x: 10264
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be2898c9f7664664c9460d065f62957a
-      internalID: 1376995113
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_9
-      rect:
-        serializedVersion: 2
-        x: 11547
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2ac8f797031c3bf4b8cdd5126240409d
-      internalID: 2068582099
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_10
-      rect:
-        serializedVersion: 2
-        x: 12830
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be12c094d053ee743a4576d0bf437300
-      internalID: 22958590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_11
-      rect:
-        serializedVersion: 2
-        x: 14113
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fa5403b4cbb0d24a85ea4c30b9f4011
-      internalID: -211183962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_12
-      rect:
-        serializedVersion: 2
-        x: 15396
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a795ef47395be24f8c9fbcf1f5419eb
-      internalID: -1033050516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_13
-      rect:
-        serializedVersion: 2
-        x: 16679
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e86b1638468a72a4fbf75a2be54bb34d
-      internalID: -2129407665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_14
-      rect:
-        serializedVersion: 2
-        x: 17962
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 208328162bffc7842aacb523f55f69ae
-      internalID: -1429610883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_15
-      rect:
-        serializedVersion: 2
-        x: 19245
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c7ee022924e4f2b48b7687f26cfbc57f
-      internalID: -2071984016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_16
-      rect:
-        serializedVersion: 2
-        x: 20528
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 10efc223d0fe2824e830ae570fa6bd28
-      internalID: -1513835450
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_17
-      rect:
-        serializedVersion: 2
-        x: 21811
-        y: 0
-        width: 1283
-        height: 720
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c61d97f1a988ea4b95542947ba969e8
-      internalID: 267776929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_18
-      rect:
-        serializedVersion: 2
-        x: 23094
-        y: 0
-        width: 1283
-        height: 720
+        width: 1140
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,20 +502,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dbf6c3a47da1e74f8826e993154472d
-      internalID: -1450290208
+      spriteID: 19d8c317bf125664d8cb0b65389c2258
+      internalID: -314886652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RoqueLosMuchachos2 (2)_19
+      name: RoqueTest2_19
       rect:
         serializedVersion: 2
-        x: 24377
+        x: 1140
         y: 0
-        width: 1283
-        height: 720
+        width: 1140
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -549,8 +523,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e333d0a40976e714397c38d18010af91
-      internalID: -283061183
+      spriteID: 2b2196d2cf6a5724793acd8f0be43f37
+      internalID: 1551927781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoqueTest2_20
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 0
+        width: 1140
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4a74d3e740f07a4e888b8a9de20a778
+      internalID: -664373537
       vertices: []
       indices: 
       edges: []
@@ -558,7 +553,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: aa7dda7d89ab928459424ffd143d648b
+    spriteID: 53786fd3017e3b34c8bf3d585252add4
     internalID: 0
     vertices: []
     indices: 
@@ -566,26 +561,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RoqueLosMuchachos2 (2)_0: -1108431030
-      RoqueLosMuchachos2 (2)_1: -1171009855
-      RoqueLosMuchachos2 (2)_10: 22958590
-      RoqueLosMuchachos2 (2)_11: -211183962
-      RoqueLosMuchachos2 (2)_12: -1033050516
-      RoqueLosMuchachos2 (2)_13: -2129407665
-      RoqueLosMuchachos2 (2)_14: -1429610883
-      RoqueLosMuchachos2 (2)_15: -2071984016
-      RoqueLosMuchachos2 (2)_16: -1513835450
-      RoqueLosMuchachos2 (2)_17: 267776929
-      RoqueLosMuchachos2 (2)_18: -1450290208
-      RoqueLosMuchachos2 (2)_19: -283061183
-      RoqueLosMuchachos2 (2)_2: -1569610468
-      RoqueLosMuchachos2 (2)_3: 1568156106
-      RoqueLosMuchachos2 (2)_4: 2096512673
-      RoqueLosMuchachos2 (2)_5: -1786419503
-      RoqueLosMuchachos2 (2)_6: 1604540621
-      RoqueLosMuchachos2 (2)_7: 19514178
-      RoqueLosMuchachos2 (2)_8: 1376995113
-      RoqueLosMuchachos2 (2)_9: 2068582099
+      RoqueTest2_0: -2080622594
+      RoqueTest2_1: 1171606369
+      RoqueTest2_10: -1980840600
+      RoqueTest2_11: 676433929
+      RoqueTest2_12: 1948723628
+      RoqueTest2_13: -2146537564
+      RoqueTest2_14: -990964639
+      RoqueTest2_15: -1885977415
+      RoqueTest2_16: 856984850
+      RoqueTest2_17: -1104754342
+      RoqueTest2_18: -314886652
+      RoqueTest2_19: 1551927781
+      RoqueTest2_2: -490720314
+      RoqueTest2_20: -664373537
+      RoqueTest2_3: 1836743936
+      RoqueTest2_4: 1779331360
+      RoqueTest2_5: 48480399
+      RoqueTest2_6: -1687609779
+      RoqueTest2_7: -1668324014
+      RoqueTest2_8: -226608953
+      RoqueTest2_9: 410788323
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
