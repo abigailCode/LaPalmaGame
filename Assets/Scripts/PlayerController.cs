@@ -267,9 +267,10 @@ public class PlayerController : MonoBehaviour
             AudioManager.instance.PlayMusic("MenuTheme"); 
             SceneController.instance.LoadScene("StarsFinal");
         }
-        if (collision.CompareTag("GoalSky"))
+        if (collision.CompareTag("Crystal"))
         {
-            //SceneController.instance.LoadScene("Houses");
+            AudioManager.instance.PlaySFX("Respawn");
+            SceneController.instance.LoadScene("Victory");
         }
     }
 

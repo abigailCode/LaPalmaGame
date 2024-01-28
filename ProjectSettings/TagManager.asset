@@ -12,6 +12,8 @@ TagManager:
   - GoalHouses
   - GoalForest
   - GoalSky
+  - Goal
+  - Crystal
   layers:
   - Default
   - TransparentFX

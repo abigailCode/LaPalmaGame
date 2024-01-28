@@ -53,8 +53,15 @@ public class Menu : MonoBehaviour
         AudioManager.instance.PlaySFX("Boton");
         CreditsPanel.SetActive(false);
     }
-    //QUIT
 
+    //MENU
+    public void GoToMenu()
+    {
+        AudioManager.instance.PlaySFX("Boton");
+        SceneController.instance.LoadScene("Menu");
+    }
+
+    //QUIT
     public void QuitGame()
     {
         AudioManager.instance.PlaySFX("Boton");
