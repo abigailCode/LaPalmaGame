@@ -65,6 +65,12 @@ public class PlayerController : MonoBehaviour
         // GravityController();  
         ApplyCustomGravity();
 
+        if (isJumping && (rb.velocity.x < 0.1f && rb.velocity.y <= 1f && rb.velocity.y >= -1f)) {
+
+            Move(horizontalInput);
+
+        }
+
         if (Input.GetKeyDown(KeyCode.V)) SceneController.instance.LoadScene("Beach");
         if (Input.GetKeyDown(KeyCode.B)) SceneController.instance.LoadScene("Houses");
         if (Input.GetKeyDown(KeyCode.N)) SceneController.instance.LoadScene("Stars");
