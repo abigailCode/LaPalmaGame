@@ -187,8 +187,9 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.y < 0)
             rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        else if (rb.velocity.y > 0 && (!Input.GetKey(KeyCode.Space) || Input.GetKey("Fire2")))
+        else if (rb.velocity.y > 0 && (!Input.GetKey(KeyCode.Space) && !Input.GetButton("Fire2")))
             rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+
     }
     void CheckGrounded()
     {

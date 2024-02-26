@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
@@ -33,7 +34,9 @@ public class Menu : MonoBehaviour
         {
             SceneController.instance.LoadScene("StarsFinal");
             AudioManager.instance.PlayMusic("MenuTheme");
-        }    
+        }
+
+        if (CreditsPanel.activeSelf && (Input.GetButtonDown("Fire3"))) HideCredits(); 
     }
     public void StartGame()
     {
@@ -46,10 +49,12 @@ public class Menu : MonoBehaviour
     {
         AudioManager.instance.PlaySFX("Boton");
         CreditsPanel.SetActive(true);
+               
     }
     
     public void HideCredits()
     {
+       
         AudioManager.instance.PlaySFX("Boton");
         CreditsPanel.SetActive(false);
     }
