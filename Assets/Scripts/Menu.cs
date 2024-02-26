@@ -36,7 +36,7 @@ public class Menu : MonoBehaviour
             AudioManager.instance.PlayMusic("MenuTheme");
         }
 
-        if (CreditsPanel.activeSelf && (Input.GetButtonDown("Fire3"))) HideCredits(); 
+        if ((CreditsPanel.activeSelf) && (Input.GetButtonDown("Fire3")) || Input.GetButtonDown("Fire2")) HideCredits(); 
     }
     public void StartGame()
     {
