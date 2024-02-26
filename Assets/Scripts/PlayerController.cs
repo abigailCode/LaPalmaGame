@@ -78,10 +78,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded)
+        if ((Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetKeyDown(KeyCode.Space)) && !isJumping && isGrounded)
             StartCharging();
 
-        if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && isJumping)
+        if ((Input.GetButtonUp("Fire1") || Input.GetButtonUp("Fire2") || Input.GetKeyUp(KeyCode.Space)) && isJumping)
         {
             AudioManager.instance.PlaySFX("Jump");
             Jump();
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.y < 0)
             rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (rb.velocity.y > 0 && (!Input.GetKey(KeyCode.Space) || Input.GetKey("Fire2")))
             rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
     }
     void CheckGrounded()
